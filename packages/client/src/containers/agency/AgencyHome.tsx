@@ -98,7 +98,7 @@ export class AgencyHome extends Component<Props, State> {
 
     deleteAgency = async (data: any) => {
         console.log('deleting... >', data);
-        let res = await axios.delete(`http://localhost:3001/agencies/${data.id}`);
+        let res = await axios.delete(`./api/v1/practices/agencies/${data.id}`);
         this.loadData();
     }
 

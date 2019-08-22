@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const cqrs_1 = require("@nestjs/cqrs");
-const microservices_1 = require("@nestjs/microservices");
 const practices_1 = require("../../infrastructure/practices");
 const events_1 = require("./events");
 const controllers_1 = require("./controllers");
@@ -19,23 +18,14 @@ const queries_1 = require("./queries");
 const delete_agency_handler_1 = require("./commands/handlers/delete-agency.handler");
 const save_mechanism_handler_1 = require("./commands/handlers/save-mechanism.handler");
 const delete_mechanism_handler_1 = require("./commands/handlers/delete-mechanism.handler");
+const messaging_module_1 = require("../../infrastructure/messging/messaging.module");
 let PracticesModule = class PracticesModule {
 };
 PracticesModule = __decorate([
     common_1.Module({
         imports: [
             cqrs_1.CqrsModule,
-            microservices_1.ClientsModule.register([
-                {
-                    name: 'GLOBE_SERVICE',
-                    transport: microservices_1.Transport.RMQ,
-                    options: {
-                        urls: [`amqp://localhost:5672/spot`],
-                        queue: 'stats_queue',
-                        queueOptions: { durable: true },
-                    },
-                },
-            ]),
+            messaging_module_1.MessagingModule,
             practices_1.PracticesInfrastructureModule,
         ],
         controllers: [controllers_1.AgenciesController, controllers_1.FacilitiesController, controllers_1.MechanismsController],

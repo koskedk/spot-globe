@@ -4,21 +4,12 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { LocationsController } from './controllers';
 import { GetLocationsHandler } from './queries';
 import { LocationsInfrastructureModule } from '../../infrastructure/locations';
+import { MessagingModule } from "../../infrastructure/messging/messaging.module";
 
 @Module({
   imports: [
     CqrsModule,
-    ClientsModule.register([
-      {
-        name: 'GLOBE_SERVICE',
-        transport: Transport.RMQ,
-        options: {
-          urls: [`amqp://localhost:5672/spot`],
-          queue: 'stats_queue',
-          queueOptions: { durable: true },
-        },
-      },
-    ]),
+    MessagingModule,
     LocationsInfrastructureModule,
   ],
   controllers: [LocationsController],

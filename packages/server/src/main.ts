@@ -12,14 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config=app.get(ConfigService);
   Logger.log(`starting in ${process.env.NODE_ENV} mode`);
-  const microservice = app.connectMicroservice({
-    transport: Transport.RMQ,
-    options: {
-      urls: [config.QueueHost],
-      queue: config.QueueName,
-      queueOptions: { durable: true },
-    },
-  });
+  const microservice = app.connectMicroservice(config.QueueConfig);
   app.enableCors();
   const seeder = app.get(SeederModule);
   await seeder.seedData();

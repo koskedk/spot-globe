@@ -29,21 +29,12 @@ import {
 import { DeleteAgencyHandler } from './commands/handlers/delete-agency.handler';
 import { SaveMechanismHandler } from './commands/handlers/save-mechanism.handler';
 import { DeleteMechanismHandler } from './commands/handlers/delete-mechanism.handler';
+import { MessagingModule } from "../../infrastructure/messging/messaging.module";
 
 @Module({
   imports: [
     CqrsModule,
-    ClientsModule.register([
-      {
-        name: 'GLOBE_SERVICE',
-        transport: Transport.RMQ,
-        options: {
-          urls: [`amqp://localhost:5672/spot`],
-          queue: 'stats_queue',
-          queueOptions: { durable: true },
-        },
-      },
-    ]),
+    MessagingModule,
     PracticesInfrastructureModule,
   ],
   controllers: [AgenciesController, FacilitiesController, MechanismsController],

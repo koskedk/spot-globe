@@ -1629,8 +1629,28 @@
         "version": "e59b0d1c1adc392dd07186e46de965e910c02969f93f6026f68a53b4f8eec44c",
         "signature": "1288b3cda7e16cb4064186a7a243faa174a85adbf1497810aecef6418d4a363a"
       },
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/dotenv/index.d.ts": {
+        "version": "2cba9752a0198d6c9cc96bc63463020f6a00de7d8f63cfd6a5eb35975662b09a",
+        "signature": "2cba9752a0198d6c9cc96bc63463020f6a00de7d8f63cfd6a5eb35975662b09a"
+      },
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts": {
+        "version": "20babc84d37cb2ec245f0ca55f7c97cad67214f574c29081aba89620a855f23a",
+        "signature": "20babc84d37cb2ec245f0ca55f7c97cad67214f574c29081aba89620a855f23a"
+      },
+      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.service.ts": {
+        "version": "109c4277a123b2685a72dc7cb8ec683f6433f4bf4ef003cb8746701094982f46",
+        "signature": "315a1051c9ecb18a53f557dd36bde8f7d83e9523267406e4e61cc4cd8d7f8ad3"
+      },
+      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.module.ts": {
+        "version": "c32cd8ee1aea9e13f1dedb052d0aaaa784d17186380aa37566528c75a9ef480a",
+        "signature": "57875529e29eaf2f3fc6bbd50d92f271595480ba5962575d809d84a3c6ddcb6b"
+      },
+      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/infrastructure/messging/messaging.module.ts": {
+        "version": "a5ea78d9667a9a4399427d11d3dc0bf63f4f43c2b41bc87c1f0c5942b08e5b3c",
+        "signature": "f6f8a2f4594785edf70c5e00392ef15e6d04bf0cfbe651312376007fa5920207"
+      },
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/locations/locations.module.ts": {
-        "version": "7d1136b70d633310e667551b2ced00092cba526985c0c16d63d67a2abbdec1e1",
+        "version": "f0ce927a3dae4631d76b6d38a64482ffc21b1f1ebc5eb00a3851a85183f66bdf",
         "signature": "f9675abe588ae429479d38577cf9b0ecd46304f08065e87b1f4fcf240e0aca36"
       },
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/practices/events/agency-created.event.ts": {
@@ -2334,7 +2354,7 @@
         "signature": "0ef6676a59dd5ce2563f139e8fe8341bb57a6ee7938cdfa2312932d02dc34c59"
       },
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/practices/practices.module.ts": {
-        "version": "7033273c2f520bcd4be9f1caef78d515ca6c9ab635e174e773ba2020bd4b5e45",
+        "version": "d1a1695f1fe366af75ee32bc155f25c94f33b1fd150ed5ce097898efc0227e38",
         "signature": "a61c7d0a3fef48a7580636583e4d530aa8b378bfea4e4e307bfa5c7194d5d41e"
       },
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@nodelib/fs.scandir/out/adapters/fs.d.ts": {
@@ -2449,22 +2469,6 @@
         "version": "e8f9f264e3ea0194a82c62487e724f9f2a119425a64a94703b682e8dd30ac88f",
         "signature": "59bf4be2418926e22eefa6619d6398df9594b8daf89f96809fd79cc2b7921ca3"
       },
-      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/dotenv/index.d.ts": {
-        "version": "2cba9752a0198d6c9cc96bc63463020f6a00de7d8f63cfd6a5eb35975662b09a",
-        "signature": "2cba9752a0198d6c9cc96bc63463020f6a00de7d8f63cfd6a5eb35975662b09a"
-      },
-      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts": {
-        "version": "20babc84d37cb2ec245f0ca55f7c97cad67214f574c29081aba89620a855f23a",
-        "signature": "20babc84d37cb2ec245f0ca55f7c97cad67214f574c29081aba89620a855f23a"
-      },
-      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.service.ts": {
-        "version": "0360a2b8ce05d561f367b41944bcdf2f100648663608c4386bc26c634e1d0c94",
-        "signature": "4ed86e94ddc984a3e52b007b15bcbc7762d0f0502ecdce27aa373fb7c639020b"
-      },
-      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.module.ts": {
-        "version": "c32cd8ee1aea9e13f1dedb052d0aaaa784d17186380aa37566528c75a9ef480a",
-        "signature": "57875529e29eaf2f3fc6bbd50d92f271595480ba5962575d809d84a3c6ddcb6b"
-      },
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/database/database.providers.ts": {
         "version": "1cff3f885a6d8cebf4405ada5d0dbb14b2d3ac45d4ffa21210f2433fb6d42a5d",
         "signature": "0a4ded4c0b2365120cdcec1bfdffbbceeb26e09522c85a81f07f19620744cc9e"
@@ -2510,7 +2514,7 @@
         "signature": "0b916b9cf5edf5614f4f9863176fa893e3e40178f2c411bb32c3084473143d2d"
       },
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/main.ts": {
-        "version": "7107ddd488a167e074c9357aac0941ee5d68022fbae11e45b9acdd61bb3e1f53",
+        "version": "cb666a5062e26c8d5e1bfcb475a3608c737a41cdf52e57c9bf7a082e1ae48263",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
       },
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/practices/commands/index.ts": {
@@ -5261,6 +5265,38 @@
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/dotenv/index.d.ts": [
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/index.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts": [
+        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.service.ts": [
+        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/dotenv/index.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/fs.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@nestjs/microservices/index.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.module.ts": [
+        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@nestjs/common/index.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.service.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/infrastructure/messging/messaging.module.ts": [
+        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@nestjs/common/index.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@nestjs/microservices/index.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.service.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.module.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/locations/locations.module.ts": [
         "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@nestjs/common/index.d.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@nestjs/cqrs/index.d.ts",
@@ -5268,6 +5304,7 @@
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/locations/controllers/index.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/locations/queries/index.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/infrastructure/locations/index.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/infrastructure/messging/messaging.module.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -6491,6 +6528,7 @@
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/practices/commands/handlers/delete-agency.handler.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/practices/commands/handlers/save-mechanism.handler.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/practices/commands/handlers/delete-mechanism.handler.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/infrastructure/messging/messaging.module.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -6693,29 +6731,6 @@
         "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/nest-router/index.d.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/practices/practices.module.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/locations/locations.module.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/dotenv/index.d.ts": [
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/index.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts": [
-        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.service.ts": [
-        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/dotenv/index.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/fs.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.module.ts": [
-        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@nestjs/common/index.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.service.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -9586,6 +9601,16 @@
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/infrastructure/locations/locations.infrastructure.module.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/infrastructure/locations/schemas/county.schema.ts"
       ],
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/dotenv/index.d.ts": [
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/index.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts": [
+        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/practices/events/agency-created.event.ts": [
         "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@nestjs/cqrs/index.d.ts"
       ],
@@ -10724,16 +10749,6 @@
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/routes.ts": [
         "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/nest-router/index.d.ts"
       ],
-      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/dotenv/index.d.ts": [
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/index.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts": [
-        "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
-        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/database/database.providers.ts": [
         "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@nestjs/common/index.d.ts"
       ],
@@ -11527,6 +11542,11 @@
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/infrastructure/locations/schemas/county.schema.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/infrastructure/locations/locations.infrastructure.module.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/infrastructure/locations/index.ts",
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/dotenv/index.d.ts",
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts",
+      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.service.ts",
+      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.module.ts",
+      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/infrastructure/messging/messaging.module.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/locations/locations.module.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/practices/events/agency-created.event.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/application/practices/events/agency-deleted.event.ts",
@@ -11732,9 +11752,6 @@
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/nest-router/router.module.d.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/nest-router/index.d.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/routes.ts",
-      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/dotenv/index.d.ts",
-      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/hapi__joi/index.d.ts",
-      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.module.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/database/database.providers.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/database/database.module.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/app.module.ts",
@@ -11807,8 +11824,7 @@
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/webpack-sources/index.d.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/webpack/index.d.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/yargs-parser/index.d.ts",
-      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/yargs/index.d.ts",
-      "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/src/config/config.service.ts"
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/yargs/index.d.ts"
     ]
   },
   "version": "3.4.3"

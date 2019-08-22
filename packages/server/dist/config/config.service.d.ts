@@ -11,4 +11,5 @@ export declare class ConfigService {
     readonly QueuePassword: string;
     readonly QueueName: string;
     readonly Database: string;
+    readonly QueueConfig: any;
 }

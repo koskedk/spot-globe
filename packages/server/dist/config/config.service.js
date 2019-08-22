@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv = require("dotenv");
 const Joi = require("@hapi/joi");
 const fs = require("fs");
+const microservices_1 = require("@nestjs/microservices");
 class ConfigService {
     constructor(filePath) {
         const config = dotenv.parse(fs.readFileSync(filePath));
@@ -43,6 +44,16 @@ class ConfigService {
     }
     get Database() {
         return String(this.envConfig.GLOBE_MONGODB_URI);
+    }
+    get QueueConfig() {
+        return {
+            transport: microservices_1.Transport.RMQ,
+            options: {
+                urls: [this.QueueHost],
+                queue: this.QueueName,
+                queueOptions: { durable: true }
+            }
+        };
     }
 }
 exports.ConfigService = ConfigService;

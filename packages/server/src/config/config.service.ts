@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 import * as Joi from "@hapi/joi";
 import * as fs from "fs";
+import { MicroserviceOptions, Transport } from "@nestjs/microservices";
 
 export interface EnvConfig {
   [key: string]: string;
@@ -63,5 +64,16 @@ export class ConfigService {
 
   get Database(): string {
     return String(this.envConfig.GLOBE_MONGODB_URI);
+  }
+
+  get QueueConfig(): any {
+    return {
+      transport: Transport.RMQ,
+      options: {
+        urls: [this.QueueHost],
+        queue: this.QueueName,
+        queueOptions: { durable: true }
+      }
+    };
   }
 }
