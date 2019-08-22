@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "name": "spot-globe",
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "client": "yarn workspace @spot-globe/client start",
+    "client:app": "yarn workspace @spot-globe/client start:app",
+    "server": "yarn workspace @spot-globe/server start",
+    "test": "yarn workspace @spot-globe/server test",
+    "start": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client:app\""
+  },
+  "dependencies": {
+    "concurrently": "^4.1.2"
+  }
+}

@@ -1,0 +1,237 @@
+[
+  {
+    "_id": "9eb13e4a-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 1,
+    "name": "MOMBASA"
+  },
+  {
+    "_id": "9eb140ca-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 2,
+    "name": "KWALE"
+  },
+  {
+    "_id": "9eb1423c-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 3,
+    "name": "KILIFI"
+  },
+  {
+    "_id": "9eb143ae-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 4,
+    "name": "TANA RIVER"
+  },
+  {
+    "_id": "9eb14502-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 5,
+    "name": "LAMU"
+  },
+  {
+    "_id": "9eb14642-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 6,
+    "name": "TAITA TAVETA"
+  },
+  {
+    "_id": "9eb14b74-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 7,
+    "name": "GARISSA"
+  },
+  {
+    "_id": "9eb14d54-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 8,
+    "name": "WAJIR"
+  },
+  {
+    "_id": "9eb14ee4-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 9,
+    "name": "MANDERA"
+  },
+  {
+    "_id": "9eb15010-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 10,
+    "name": "MARSABIT"
+  },
+  {
+    "_id": "9eb1513c-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 11,
+    "name": "ISIOLO"
+  },
+  {
+    "_id": "9eb15268-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 12,
+    "name": "MERU"
+  },
+  {
+    "_id": "9eb1539e-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 13,
+    "name": "THARAKA - NITHI"
+  },
+  {
+    "_id": "9eb157ea-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 14,
+    "name": "EMBU"
+  },
+  {
+    "_id": "9eb15948-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 15,
+    "name": "KITUI"
+  },
+  {
+    "_id": "9eb15a92-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 16,
+    "name": "MACHAKOS"
+  },
+  {
+    "_id": "9eb15bc8-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 17,
+    "name": "MAKUENI"
+  },
+  {
+    "_id": "9eb15d08-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 18,
+    "name": "NYANDARUA"
+  },
+  {
+    "_id": "9eb15e34-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 19,
+    "name": "NYERI"
+  },
+  {
+    "_id": "9eb15f60-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 20,
+    "name": "KIRINYAGA"
+  },
+  {
+    "_id": "9eb162ee-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 21,
+    "name": "MURANG'A"
+  },
+  {
+    "_id": "9eb16442-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 22,
+    "name": "KIAMBU"
+  },
+  {
+    "_id": "9eb1656e-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 23,
+    "name": "TURKANA"
+  },
+  {
+    "_id": "9eb1669a-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 24,
+    "name": "WEST POKOT"
+  },
+  {
+    "_id": "9eb167da-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 25,
+    "name": "SAMBURU"
+  },
+  {
+    "_id": "9eb16906-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 26,
+    "name": "TRANS NZOIA"
+  },
+  {
+    "_id": "9eb16a32-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 27,
+    "name": "UASIN GISHU"
+  },
+  {
+    "_id": "9eb16dca-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 28,
+    "name": "ELGEYO/MARAKWET"
+  },
+  {
+    "_id": "9eb16fa0-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 29,
+    "name": "NANDI"
+  },
+  {
+    "_id": "9eb170ea-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 30,
+    "name": "BARINGO"
+  },
+  {
+    "_id": "9eb17220-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 31,
+    "name": "LAIKIPIA"
+  },
+  {
+    "_id": "9eb1734c-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 32,
+    "name": "NAKURU"
+  },
+  {
+    "_id": "9eb17478-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 33,
+    "name": "NAROK"
+  },
+  {
+    "_id": "9eb175a4-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 34,
+    "name": "KAJIADO"
+  },
+  {
+    "_id": "9eb17964-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 35,
+    "name": "KERICHO"
+  },
+  {
+    "_id": "9eb17aae-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 36,
+    "name": "BOMET"
+  },
+  {
+    "_id": "9eb17bda-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 37,
+    "name": "KAKAMEGA"
+  },
+  {
+    "_id": "9eb17d06-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 38,
+    "name": "VIHIGA"
+  },
+  {
+    "_id": "9eb17e3c-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 39,
+    "name": "BUNGOMA"
+  },
+  {
+    "_id": "9eb17f68-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 40,
+    "name": "BUSIA"
+  },
+  {
+    "_id": "9eb1822e-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 41,
+    "name": "SIAYA"
+  },
+  {
+    "_id": "9eb18378-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 42,
+    "name": "KISUMU"
+  },
+  {
+    "_id": "9eb184ae-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 43,
+    "name": "HOMA BAY"
+  },
+  {
+    "_id": "9eb185da-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 44,
+    "name": "MIGORI"
+  },
+  {
+    "_id": "9eb18706-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 45,
+    "name": "KISII"
+  },
+  {
+    "_id": "9eb18832-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 46,
+    "name": "NYAMIRA"
+  },
+  {
+    "_id": "9eb18968-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": 47,
+    "name": "NAIROBI"
+  }
+]
