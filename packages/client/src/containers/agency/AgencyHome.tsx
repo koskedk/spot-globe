@@ -72,7 +72,7 @@ export class AgencyHome extends Component<Props, State> {
             actionLabel: 'saving...'
         })
 
-        let res = await axios.post("http://localhost:3001/agencies", data);
+        let res = await axios.post("./api/v1/practices/agencies", data);
         let savedAgency = res.data;
         console.log(`saved ${savedAgency}`);
 

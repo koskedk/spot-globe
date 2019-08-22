@@ -11,6 +11,7 @@ import { ConfigModule } from "./config/config.module";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config=app.get(ConfigService);
+  Logger.log(`starting in ${process.env.NODE_ENV} mode`);
   const microservice = app.connectMicroservice({
     transport: Transport.RMQ,
     options: {
