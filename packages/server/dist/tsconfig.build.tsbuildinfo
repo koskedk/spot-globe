@@ -2669,6 +2669,10 @@
         "version": "5e632216dfe01f2ff76f1c312c28632fde75364c24d659b732f2ee59e9ccf1b2",
         "signature": "5e632216dfe01f2ff76f1c312c28632fde75364c24d659b732f2ee59e9ccf1b2"
       },
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/q/index.d.ts": {
+        "version": "57427a9a368f8f0ee4ce03c36a762e19166756b95ab688948b29be553b24a78a",
+        "signature": "57427a9a368f8f0ee4ce03c36a762e19166756b95ab688948b29be553b24a78a"
+      },
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/react/global.d.ts": {
         "version": "2bbdfc5ed049f38787376bb01b7bcfe5299eac853c76c16a3e21ab0279078314",
         "signature": "2bbdfc5ed049f38787376bb01b7bcfe5299eac853c76c16a3e21ab0279078314"
@@ -7034,6 +7038,10 @@
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/q/index.d.ts": [
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/react/global.d.ts": [
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
@@ -11002,6 +11010,10 @@
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/q/index.d.ts": [
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
+        "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/react/global.d.ts": [
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/util.d.ts",
         "/users/koskedk/projects/hmis/showcase/spot-globe/packages/server/node_modules/@types/node/ts3.2/util.d.ts"
@@ -11802,6 +11814,7 @@
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/jest/index.d.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/json5/index.d.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/prop-types/index.d.ts",
+      "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/q/index.d.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/react/global.d.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/csstype/index.d.ts",
       "/users/koskedk/projects/hmis/showcase/spot-globe/node_modules/@types/react/index.d.ts",

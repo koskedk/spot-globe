@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import singleSpaReact from 'single-spa-react';
-import {App} from "./containers/App";
+import {Root} from "./root.component";
 
 const reactLifecycles = singleSpaReact({
     React,
     ReactDOM,
-    rootComponent: App,
+    rootComponent: Root,
     domElementGetter,
 })
 

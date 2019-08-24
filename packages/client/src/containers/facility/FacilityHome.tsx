@@ -7,9 +7,6 @@ import {Messages} from "primereact/messages";
 import {FacilityForm} from "./FaciiltyForm";
 import {FacilityList} from "./FacilityList";
 
-interface Props {
-
-}
 
 interface State {
     agencies: []
@@ -19,10 +16,10 @@ interface State {
     activeAgency: Agency;
 }
 
-export class FacilityHome extends Component<Props, State> {
+export class FacilityHome extends Component<{}, State> {
     private messages: any;
 
-    constructor(props: Readonly<Props>) {
+    constructor(props: Readonly<any>) {
         super(props);
         this.state = {
             agencies: [],
