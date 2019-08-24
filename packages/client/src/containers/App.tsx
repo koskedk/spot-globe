@@ -2,9 +2,8 @@ import React from "react";
 import {Component} from "react";
 import {AppMenu} from "../components/AppMenu";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
-import {AgencyHome} from "./agency/AgencyHome";
-import {FacilityHome} from "./facility/FacilityHome";
 import './App.css';
+import { AgencyScene } from "./agency";
 
 interface Props {
     menuClick?: boolean
@@ -214,8 +213,8 @@ export class App extends Component<Props, State> {
                     <div className="layout-main">
                        <div className="layout-content">
                             <Router>
-                                <Route path="/" exact component={AgencyHome}/>
-                                <Route path="/facility" exact component={FacilityHome}/>
+                                <Route path="/" exact component={AgencyScene}/>
+                          {/*      <Route path="/facility" exact component={FacilityHome}/>*/}
                             </Router>
                         </div>
                     </div>

@@ -1,58 +1,70 @@
-import React, {Component} from 'react';
-import {Button} from "primereact/button";
-import {InputText} from "primereact/inputtext";
+import React, { Component } from "react";
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
+import { Agency } from "./models/agency";
 
 interface Props {
-    onFormSubmitted: any;
-    agency: any
+  onSave: any;
+  onCancel: any;
+  onDelete: any;
+  agency: Agency;
 }
 
 interface State {
-    id: string,
-    name: string,
-    display: string
+  agency: Agency
 }
 
 export class AgencyForm extends Component<Props, State> {
 
+  constructor(props: Readonly<Props>) {
+    super(props);
+    this.state = {
+      agency: props.agency
+    };
+  }
 
-    componentDidMount(): void {
-        const {id, name, display} = this.props.agency
-        this.setState({
-            id, name, display
-        })
-    }
+  saveAction = (event: any) => {
+    event.preventDefault();
+    this.props.onSave(this.state.agency);
+  };
 
-    handleSubmit = (event: any) => {
-        event.preventDefault();
-        this.props.onFormSubmitted(this.state);
-    }
+  cancelAction = (event: any) => {
+    event.preventDefault();
+    this.props.onCancel(this.state.agency);
+  };
 
-    render() {
-        return (
-            <div>
-                {this.state ?
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Id:<InputText type="text" value={this.state.id} name="id" readOnly
-                                          onChange={(event:any) => this.setState({id: event.target.value})}
+  deleteAction = (event: any) => {
+    event.preventDefault();
+    this.props.onDelete(this.state.agency);
+  };
 
-                        />
-                        </label>
-                        <label>
-                            Name:<InputText type="text" value={this.state.name} name="name"
-                                            onChange={(event:any) => this.setState({name: event.target.value})}/>
-                        </label>
-                        <label>
-                            Display:<InputText type="text" value={this.state.display} name="display"
-                                               onChange={(event:any) => this.setState({display: event.target.value})}/>
-                        </label>
+  handleInputChange = (event: any) => {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+    console.log("changin...", name);
+    this.setState(prevState => ({
+      agency: {
+        ...prevState.agency,
+        [name]: value
+      }
+    }));
 
-                        <Button type="submit" label="Save" icon="pi pi-check" className="p-button-success"/>
-                    </form> :
-                    <div></div>
-                }
-            </div>);
-    }
+    console.log("finad...", this.state.agency);
+  };
 
+  render() {
+    return (
+      <div>
+        <form>
+          <InputText type="text" value={this.state.agency._id} name="_id" readOnly onChange={this.handleInputChange}/>
+          <InputText type="text" value={this.state.agency.name} name="name" onChange={this.handleInputChange}/>
+          <InputText type="text" value={this.state.agency.display} name="display" onChange={this.handleInputChange}/>
+          <Button onClick={this.saveAction} label="Save" icon="pi pi-check" className="p-button-success"/>
+          <Button onClick={this.cancelAction} label="Cancel" icon="pi pi-times"/>
+          <Button onClick={this.deleteAction} label="Delete" icon="pi pi-trash" className="p-button-danger"
+                  style={{ "float": "right" }}/>
+        </form>
+      </div>);
+  }
 }

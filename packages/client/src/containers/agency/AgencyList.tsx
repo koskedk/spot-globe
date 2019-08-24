@@ -1,50 +1,49 @@
-import React, {Component} from "react";
-import {Agency} from "../../models/agency";
-import {DataTable} from "primereact/datatable";
-import {Column} from "primereact/column";
-import {Button} from "primereact/button";
+import React, { Component } from "react";
+import { Agency } from "./models/agency";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Button } from "primereact/button";
 
 interface Props {
-    agencies: Agency[]
-    onEdit: any,
-    onDelete: any
+  agencies: Agency[]
+  onManage: any
+  onAdd: any
 }
+export class AgencyList extends Component<Props, {}> {
 
-interface State {
-}
+  constructor(props: Readonly<Props>) {
+    super(props);
+  }
 
-export class AgencyList extends Component<Props, State> {
+  manageAction = (event: any, rowData: any) => {
+    event.preventDefault();
+    console.log(rowData);
+    this.props.onManage(rowData);
+  };
 
-    edit = (event: any, data: any) => {
-        event.preventDefault();
-        this.props.onEdit(data);
-    }
+  addAction = (event: any) => {
+    event.preventDefault();
+    this.props.onAdd();
+  };
 
-    delete = (event: any, data: any) => {
-        event.preventDefault();
-        this.props.onDelete(data);
-    }
+  manageTemplate = (rowData: any, column: any) => {
+    return (
+      <div>
+        <Button icon="pi pi-external-link" onClick={(event) => this.manageAction(event, rowData)}></Button>
+      </div>);
+  };
 
-    actionTemplate = (rowData: any, column: any) => {
-        return (
-            <div>
-                <Button type="button" icon="pi pi-pencil" style={{marginRight: '.5em'}}
-                        onClick={(event) => this.edit(event, rowData)}></Button>
-                <Button type="button" icon="pi pi-times" className="p-button-danger"
-                        onClick={(event) => this.delete(event, rowData)}></Button>
-            </div>);
-    }
+  render() {
+    const header = <div className="p-clearfix" style={{ "lineHeight": "1.87em" }}>Agencies <Button
+      onClick={this.addAction} icon="pi pi-plus" style={{ "float": "right" }}/></div>;
 
-    render() {
-        return (
-            <div>
-                <DataTable value={this.props.agencies}>
-                    <Column field="name" header="Name"/>
-                    <Column field="display" header="Display"/>
-                    <Column field="id" header="Id"/>
-                    <Column body={this.actionTemplate} style={{textAlign: 'center', width: '8em'}}/>
-                </DataTable>
-            </div>
-        );
-    }
+
+    return (
+      <div>
+        <DataTable value={this.props.agencies} header={header}>
+          <Column field="display" header="Display"/>
+          <Column header="Manage" body={this.manageTemplate} style={{ textAlign: "center", width: "8em" }}/>
+        </DataTable>
+      </div>);
+  }
 }
