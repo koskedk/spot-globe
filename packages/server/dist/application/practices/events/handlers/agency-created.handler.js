@@ -16,29 +16,28 @@ const cqrs_1 = require("@nestjs/cqrs");
 const agency_created_event_1 = require("../agency-created.event");
 const common_1 = require("@nestjs/common");
 const microservices_1 = require("@nestjs/microservices");
-const agency_updated_event_1 = require("../agency-updated.event");
 let AgencyCreatedEventHandler = class AgencyCreatedEventHandler {
     constructor(client, agencyRepository) {
         this.client = client;
         this.agencyRepository = agencyRepository;
     }
     async handle(event) {
-        const pattern = {};
-        common_1.Logger.debug(`=== AgencyCreated ===:${event._id}`);
+        common_1.Logger.debug(`===${agency_created_event_1.AgencyCreatedEvent.name}===:${event._id}`);
         const agency = await this.agencyRepository.get(event._id);
         if (agency) {
-            await this.client
-                .emit(agency_updated_event_1.AgencyUpdatedEvent.name, JSON.stringify(agency))
-                .toPromise()
-                .catch(err => common_1.Logger.error(err));
-            common_1.Logger.debug(`*** AgencyCreated Published ****:${event._id}`);
+            this.client.emit(agency_created_event_1.AgencyCreatedEvent.name, JSON.stringify(agency)).subscribe(m => {
+                common_1.Logger.log(m);
+                common_1.Logger.log('PUBLISHED');
+            }, w => { common_1.Logger.error(w); }, () => {
+                common_1.Logger.log('DONE');
+            });
         }
     }
 };
 AgencyCreatedEventHandler = __decorate([
     cqrs_1.EventsHandler(agency_created_event_1.AgencyCreatedEvent),
-    __param(0, common_1.Inject('GLOBE_SERVICE')),
-    __param(1, common_1.Inject('IAgencyRepository')),
+    __param(0, common_1.Inject("GLOBE_SERVICE")),
+    __param(1, common_1.Inject("IAgencyRepository")),
     __metadata("design:paramtypes", [microservices_1.ClientProxy, Object])
 ], AgencyCreatedEventHandler);
 exports.AgencyCreatedEventHandler = AgencyCreatedEventHandler;
