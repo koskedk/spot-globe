@@ -1,33 +1,33 @@
 import React, { Component } from "react";
-import { Agency } from "./models/agency";
 import axios from "axios";
 import { Dialog } from "primereact/dialog";
-import { AgencyForm } from "./AgencyForm";
 import { Growl } from "primereact/growl";
-import { AgencyList } from "./AgencyList";
+import { Facility } from "./models/facility";
+import { FacilityList } from "./FacilityList";
+import { FacilityForm } from "./FacilityForm";
 
 interface State {
-  agencies: Agency[]
+  facilities: Facility[]
   showForm: boolean
   editMode: boolean
-  activeAgency: Agency
+  activeFacility: Facility
 }
 
-const url = "./api/v1/practices/agencies/";
+const url = "./api/v1/practices/facilities/";
 
-export class AgencyScene extends Component<{}, State> {
+export class FacilityScene extends Component<{}, State> {
   private messages: any;
 
   constructor(props: Readonly<{}>) {
     super(props);
     this.state = {
-      agencies: [],
+      facilities: [],
       showForm: false,
       editMode: false,
-      activeAgency: {
+      activeFacility: {
         _id: "00000000-0000-0000-0000-000000000000",
-        name: "",
-        display: ""
+        code: "",
+        name: ""
       }
     };
   }
@@ -37,7 +37,7 @@ export class AgencyScene extends Component<{}, State> {
       let res = await axios.get(url);
       let data = res.data;
       this.setState(prevState => ({
-        ...prevState, agencies: data
+        ...prevState, facilities: data
       }));
     } catch (e) {
       this.messages.show({ severity: "error", summary: "Error loading", detail: `${e}` });
@@ -54,7 +54,7 @@ export class AgencyScene extends Component<{}, State> {
   handleManage = (rowData: any) => {
     this.setState(prevState => ({
       ...prevState,
-      activeAgency: rowData,
+      activeFacility: rowData,
       showForm: true,
       editMode: true
     }));
@@ -64,8 +64,8 @@ export class AgencyScene extends Component<{}, State> {
     this.messages.clear();
     try {
       let res = await axios.post(url, form);
-      let savedAgency = res.data;
-      this.messages.show({ severity: "success", summary: "Saved successfully", detail: `${savedAgency.name}` });
+      let savedFacility = res.data;
+      this.messages.show({ severity: "success", summary: "Saved successfully", detail: `${savedFacility.name}` });
       this.resetState();
       this.loadData();
     } catch (e) {
@@ -97,10 +97,10 @@ export class AgencyScene extends Component<{}, State> {
     this.setState({
       showForm: false,
       editMode: false,
-      activeAgency: {
+      activeFacility: {
         _id: "00000000-0000-0000-0000-000000000000",
-        name: "",
-        display: ""
+        code: "",
+        name: ""
       }
     });
   };
@@ -113,22 +113,27 @@ export class AgencyScene extends Component<{}, State> {
     return (
       <div>
         <Growl ref={(el) => this.messages = el}></Growl>
+
         <div>
-          {this.state.agencies ?
-            <AgencyList agencies={this.state.agencies} onManage={this.handleManage} onAdd={this.handleAdd}/> :
+          {this.state.facilities ?
+            <FacilityList facilities={this.state.facilities} onManage={this.handleManage} onAdd={this.handleAdd}/> :
             <div></div>
           }
         </div>
-        <Dialog header="Agency" visible={this.state.showForm} style={{ width: "50vw" }}
+
+        <Dialog header="Facility" visible={this.state.showForm} style={{ width: "50vw" }}
                 onHide={this.handleHide}
                 maximizable>
           {
             this.state.showForm ?
-              <AgencyForm agency={this.state.activeAgency} onSave={this.handleSave} onDelete={this.handleDelete}
-                          onCancel={this.handleCancel}/> :
+              <FacilityForm facility={this.state.activeFacility} onSave={this.handleSave}
+                       onDelete={this.handleDelete}
+                       onCancel={this.handleCancel}/> :
               <div></div>
           }
+
         </Dialog>
+
       </div>);
   }
 }

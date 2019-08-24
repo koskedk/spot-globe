@@ -1,41 +1,41 @@
 import React, { Component } from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { Agency } from "./models/agency";
+import { Facility } from "./models/facility";
 
 interface Props {
   onSave: any;
   onCancel: any;
   onDelete: any;
-  agency: Agency;
+  facility: Facility;
 }
 
 interface State {
-  agency: Agency
+  facility: Facility
 }
 
-export class AgencyForm extends Component<Props, State> {
+export class FacilityForm extends Component<Props, State> {
 
   constructor(props: Readonly<Props>) {
     super(props);
     this.state = {
-      agency: props.agency
+      facility: props.facility
     };
   }
 
   saveAction = (event: any) => {
     event.preventDefault();
-    this.props.onSave(this.state.agency);
+    this.props.onSave(this.state.facility);
   };
 
   cancelAction = (event: any) => {
     event.preventDefault();
-    this.props.onCancel(this.state.agency);
+    this.props.onCancel(this.state.facility);
   };
 
   deleteAction = (event: any) => {
     event.preventDefault();
-    this.props.onDelete(this.state.agency);
+    this.props.onDelete(this.state.facility);
   };
 
   handleInputChange = (event: any) => {
@@ -43,8 +43,8 @@ export class AgencyForm extends Component<Props, State> {
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     this.setState(prevState => ({
-      agency: {
-        ...prevState.agency,
+      facility: {
+        ...prevState.facility,
         [name]: value
       }
     }));
@@ -54,9 +54,11 @@ export class AgencyForm extends Component<Props, State> {
     return (
       <div>
         <form>
-          <InputText type="text" value={this.state.agency._id} name="_id" readOnly onChange={this.handleInputChange}/>
-          <InputText type="text" value={this.state.agency.name} name="name" onChange={this.handleInputChange}/>
-          <InputText type="text" value={this.state.agency.display} name="display" onChange={this.handleInputChange}/>
+          <InputText type="text" value={this.state.facility._id} name="_id" readOnly onChange={this.handleInputChange}/>
+          <InputText type="text" value={this.state.facility.code} name="code" onChange={this.handleInputChange}/>
+          <InputText type="text" value={this.state.facility.name} name="name" onChange={this.handleInputChange}/>
+          {/*/!*<InputText type="text" value={this.state.facility.county} name="county" onChange={this.handleInputChange}/>*/}
+          {/*<InputText type="text" value={this.state.facility.mechanism} name="mechanism" onChange={this.handleInputChange}/>*!/*/}
           <Button onClick={this.saveAction} label="Save" icon="pi pi-check" className="p-button-success"/>
           <Button onClick={this.cancelAction} label="Cancel" icon="pi pi-times"/>
           <Button onClick={this.deleteAction} label="Delete" icon="pi pi-trash" className="p-button-danger"

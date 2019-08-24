@@ -47,7 +47,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], FacilitiesController.prototype, "createOrUpdateFacility", null);
 __decorate([
-    common_1.Delete(':_id'),
+    common_1.Delete(':id'),
     __param(0, common_1.Param('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),

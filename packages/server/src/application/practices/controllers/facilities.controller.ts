@@ -34,7 +34,7 @@ export class FacilitiesController {
     );
   }
 
-  @Delete(':_id')
+  @Delete(':id')
   async deleteFacility(@Param('id') id) {
     return this.commandBus.execute(new DeleteFacilityCommand(id));
   }
