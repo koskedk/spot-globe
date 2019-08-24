@@ -27,7 +27,7 @@ let FacilitiesController = class FacilitiesController {
         return this.queryBus.execute(new queries_1.GetFacilitiesQuery());
     }
     async createOrUpdateFacility(facility) {
-        return this.commandBus.execute(new save_facility_command_1.SaveFacilityCommand(facility.code, facility.name, facility._id));
+        return this.commandBus.execute(new save_facility_command_1.SaveFacilityCommand(facility.code, facility.name, facility.county, facility.mechanism, facility._id));
     }
     async deleteFacility(id) {
         return this.commandBus.execute(new delete_facility_command_1.DeleteFacilityCommand(id));

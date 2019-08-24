@@ -30,7 +30,7 @@ export class FacilitiesController {
   @Post()
   async createOrUpdateFacility(@Body() facility: FacilityDto) {
     return this.commandBus.execute(
-      new SaveFacilityCommand(facility.code, facility.name, facility._id),
+      new SaveFacilityCommand(facility.code, facility.name,facility.county,facility.mechanism, facility._id),
     );
   }
 

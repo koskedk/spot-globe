@@ -24,7 +24,7 @@ export class MechanismsController {
         mechanism.code,
         mechanism.name,
         mechanism.implementationName,
-        mechanism.agencyId,
+        mechanism.agency,
         mechanism._id,
       ),
     );

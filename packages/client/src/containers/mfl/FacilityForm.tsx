@@ -2,16 +2,24 @@ import React, { Component } from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Facility } from "./models/facility";
+import { County } from "./models/county";
+import { Mechanism } from "../agency/models/mechanism";
+import { Dropdown } from "primereact/dropdown";
+import { Agency } from "../agency";
 
 interface Props {
   onSave: any;
   onCancel: any;
   onDelete: any;
   facility: Facility;
+  counties: County[];
+  mechanisms: Mechanism[];
 }
 
 interface State {
   facility: Facility
+  counties: County[];
+  mechanisms: Mechanism[];
 }
 
 export class FacilityForm extends Component<Props, State> {
@@ -19,7 +27,9 @@ export class FacilityForm extends Component<Props, State> {
   constructor(props: Readonly<Props>) {
     super(props);
     this.state = {
-      facility: props.facility
+      facility: props.facility,
+      counties: props.counties,
+      mechanisms: props.mechanisms
     };
   }
 
@@ -40,8 +50,12 @@ export class FacilityForm extends Component<Props, State> {
 
   handleInputChange = (event: any) => {
     const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
+    let value = target.type === "checkbox" ? target.checked : target.value;
+    let name = target.name;
+
+    if (target.id && (target.id === "county" || target.id === "mechanism")) {
+      name = target.id;
+    }
     this.setState(prevState => ({
       facility: {
         ...prevState.facility,
@@ -57,8 +71,12 @@ export class FacilityForm extends Component<Props, State> {
           <InputText type="text" value={this.state.facility._id} name="_id" readOnly onChange={this.handleInputChange}/>
           <InputText type="text" value={this.state.facility.code} name="code" onChange={this.handleInputChange}/>
           <InputText type="text" value={this.state.facility.name} name="name" onChange={this.handleInputChange}/>
-          {/*/!*<InputText type="text" value={this.state.facility.county} name="county" onChange={this.handleInputChange}/>*/}
-          {/*<InputText type="text" value={this.state.facility.mechanism} name="mechanism" onChange={this.handleInputChange}/>*!/*/}
+          <Dropdown value={this.state.facility.county}
+                    options={this.state.counties} onChange={this.handleInputChange}
+                    placeholder="Select a County"  id="county"/>
+          <Dropdown value={this.state.facility.mechanism}
+                    options={this.state.mechanisms} onChange={this.handleInputChange}
+                    placeholder="Select a Mechanism"  id="mechanism"/>
           <Button onClick={this.saveAction} label="Save" icon="pi pi-check" className="p-button-success"/>
           <Button onClick={this.cancelAction} label="Cancel" icon="pi pi-times"/>
           <Button onClick={this.deleteAction} label="Delete" icon="pi pi-trash" className="p-button-danger"

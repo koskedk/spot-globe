@@ -1,6 +1,6 @@
-import { SaveFacilityCommand } from '../save-facility.command';
-import { EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-import { IFacilityRepository } from '../../../../domain/practices/facility-repository.interface';
+import { SaveFacilityCommand } from "../save-facility.command";
+import { EventPublisher, ICommandHandler } from "@nestjs/cqrs";
+import { IFacilityRepository } from "../../../../domain/practices/facility-repository.interface";
 export declare class SaveFacilityHandler implements ICommandHandler<SaveFacilityCommand> {
     private readonly facilityRepository;
     private readonly publisher;

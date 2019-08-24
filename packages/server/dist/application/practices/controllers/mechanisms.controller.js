@@ -26,7 +26,7 @@ let MechanismsController = class MechanismsController {
         return this.queryBus.execute(new queries_1.GetMechanismsQuery());
     }
     async createOrUpdateMechanism(mechanism) {
-        return this.commandBus.execute(new save_mechanism_command_1.SaveMechanismCommand(mechanism.code, mechanism.name, mechanism.implementationName, mechanism.agencyId, mechanism._id));
+        return this.commandBus.execute(new save_mechanism_command_1.SaveMechanismCommand(mechanism.code, mechanism.name, mechanism.implementationName, mechanism.agency, mechanism._id));
     }
     async deleteMechanism(id) {
         return this.commandBus.execute(new delete_mechanism_command_1.DeleteMechanismCommand(id));

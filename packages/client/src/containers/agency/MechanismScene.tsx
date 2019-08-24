@@ -5,15 +5,18 @@ import { MechanismList } from "./MechanismList";
 import { Dialog } from "primereact/dialog";
 import { MechanismForm } from "./MechanismForm";
 import { Growl } from "primereact/growl";
+import { Agency } from "./models/agency";
 
 interface State {
   mechanisms: Mechanism[]
   showForm: boolean
   editMode: boolean
   activeMechanism: Mechanism
+  agencies: Agency[]
 }
 
 const url = "./api/v1/practices/mechanisms/";
+const agenciesUrl = "./api/v1/practices/agencies/";
 
 export class MechanismScene extends Component<{}, State> {
   private messages: any;
@@ -24,6 +27,7 @@ export class MechanismScene extends Component<{}, State> {
       mechanisms: [],
       showForm: false,
       editMode: false,
+      agencies: [],
       activeMechanism: {
         _id: "00000000-0000-0000-0000-000000000000",
         code: "",
@@ -32,6 +36,18 @@ export class MechanismScene extends Component<{}, State> {
       }
     };
   }
+
+  loadMeta = async () => {
+    try {
+      let res = await axios.get(agenciesUrl);
+      let data = res.data;
+      this.setState(prevState => ({
+        ...prevState, agencies: data.map((a: Agency) => ({ label: a.name, value: a._id }))
+      }));
+    } catch (e) {
+      this.messages.show({ severity: "error", summary: "Error loading", detail: `${e}` });
+    }
+  };
 
   loadData = async () => {
     try {
@@ -87,11 +103,14 @@ export class MechanismScene extends Component<{}, State> {
   };
 
   handleCancel = (form: any) => {
-    console.log(form);
+    this.resetState()
+    this.handleHide();
   };
 
   handleHide = () => {
-    this.setState({ showForm: false });
+    this.setState(prevState => ({
+      ...prevState, showForm: false
+    }));
   };
 
   resetState = () => {
@@ -107,6 +126,7 @@ export class MechanismScene extends Component<{}, State> {
   };
 
   async componentDidMount() {
+    await this.loadMeta();
     await this.loadData();
   }
 
@@ -127,7 +147,9 @@ export class MechanismScene extends Component<{}, State> {
                 maximizable>
           {
             this.state.showForm ?
-              <MechanismForm mechanism={this.state.activeMechanism} onSave={this.handleSave}
+              <MechanismForm mechanism={this.state.activeMechanism}
+                             agencies={this.state.agencies}
+                             onSave={this.handleSave}
                              onDelete={this.handleDelete}
                              onCancel={this.handleCancel}/> :
               <div></div>

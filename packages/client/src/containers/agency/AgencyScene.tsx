@@ -86,11 +86,14 @@ export class AgencyScene extends Component<{}, State> {
   };
 
   handleCancel = (form: any) => {
-    console.log(form);
+    this.resetState()
+    this.handleHide();
   };
 
   handleHide = () => {
-    this.setState({ showForm: false });
+    this.setState(prevState => ({
+      ...prevState, showForm: false
+    }));
   };
 
   resetState = () => {

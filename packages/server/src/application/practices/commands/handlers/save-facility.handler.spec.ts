@@ -46,14 +46,14 @@ describe('Save Facility Command Tests', () => {
   });
 
   it('should create Facility', async () => {
-    const command = new SaveFacilityCommand(300, 'FacDemo');
+    const command = new SaveFacilityCommand(300, 'FacDemo','','');
     const result = await commandBus.execute(command);
     expect(result).not.toBeNull();
     Logger.debug(result);
   });
 
   it('should modify Facility', async () => {
-    const command = new SaveFacilityCommand(400, 'FacTest', liveFacility._id);
+    const command = new SaveFacilityCommand(400, 'FacTest','','', liveFacility._id);
     const result = await commandBus.execute(command);
     expect(result.name).toBe('FacTest');
     expect(result._id).toBe(liveFacility._id);

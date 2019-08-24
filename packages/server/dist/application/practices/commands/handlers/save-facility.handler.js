@@ -23,13 +23,13 @@ let SaveFacilityHandler = class SaveFacilityHandler {
         this.publisher = publisher;
     }
     async execute(command) {
-        if (command._id && command._id !== '00000000-0000-0000-0000-000000000000') {
+        if (command._id && command._id !== "00000000-0000-0000-0000-000000000000") {
             return await this.updateFacility(command);
         }
         return await this.createFacility(command);
     }
     async createFacility(command) {
-        const newFacility = new facility_1.Facility(command.code, command.name);
+        const newFacility = new facility_1.Facility(command.code, command.name, command.county, command.mechanism);
         const facility = await this.facilityRepository.create(newFacility);
         this.publisher.mergeObjectContext(newFacility).commit();
         return facility;
@@ -38,7 +38,7 @@ let SaveFacilityHandler = class SaveFacilityHandler {
         const raw = await this.facilityRepository.get(command._id);
         if (raw) {
             const facilityToUpdate = class_transformer_1.plainToClass(facility_1.Facility, raw);
-            facilityToUpdate.changeDetails(command.code, command.name);
+            facilityToUpdate.changeDetails(command.code, command.name, command.county, command.mechanism);
             const facility = await this.facilityRepository.update(facilityToUpdate);
             this.publisher.mergeObjectContext(facilityToUpdate).commit();
             return facility;
@@ -50,7 +50,7 @@ let SaveFacilityHandler = class SaveFacilityHandler {
 };
 SaveFacilityHandler = __decorate([
     cqrs_1.CommandHandler(save_facility_command_1.SaveFacilityCommand),
-    __param(0, common_1.Inject('IFacilityRepository')),
+    __param(0, common_1.Inject("IFacilityRepository")),
     __metadata("design:paramtypes", [Object, cqrs_1.EventPublisher])
 ], SaveFacilityHandler);
 exports.SaveFacilityHandler = SaveFacilityHandler;

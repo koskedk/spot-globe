@@ -5,15 +5,22 @@ import { Growl } from "primereact/growl";
 import { Facility } from "./models/facility";
 import { FacilityList } from "./FacilityList";
 import { FacilityForm } from "./FacilityForm";
+import { Agency } from "../agency";
+import { County } from "./models/county";
+import { Mechanism } from "../agency/models/mechanism";
 
 interface State {
   facilities: Facility[]
   showForm: boolean
   editMode: boolean
   activeFacility: Facility
+  counties:County[]
+  mechanisms:Mechanism[]
 }
 
 const url = "./api/v1/practices/facilities/";
+const countiesUrl = "./api/v1/locations/";
+const mechanismsUrl = "./api/v1/practices/mechanisms/";
 
 export class FacilityScene extends Component<{}, State> {
   private messages: any;
@@ -28,9 +35,34 @@ export class FacilityScene extends Component<{}, State> {
         _id: "00000000-0000-0000-0000-000000000000",
         code: "",
         name: ""
-      }
+      },
+      counties:[],
+      mechanisms:[]
     };
   }
+
+  loadMeta = async () => {
+
+    try {
+      let res = await axios.get(countiesUrl);
+      let data = res.data;
+      this.setState(prevState => ({
+        ...prevState, counties: data.map((a: County) => ({ label: a.name, value: a._id }))
+      }));
+    } catch (e) {
+      this.messages.show({ severity: "error", summary: "Error loading", detail: `${e}` });
+    }
+
+    try {
+      let res = await axios.get(mechanismsUrl);
+      let data = res.data;
+      this.setState(prevState => ({
+        ...prevState, mechanisms: data.map((a: Mechanism) => ({ label: a.name, value: a._id }))
+      }));
+    } catch (e) {
+      this.messages.show({ severity: "error", summary: "Error loading", detail: `${e}` });
+    }
+  };
 
   loadData = async () => {
     try {
@@ -86,11 +118,14 @@ export class FacilityScene extends Component<{}, State> {
   };
 
   handleCancel = (form: any) => {
-    console.log(form);
+    this.resetState()
+    this.handleHide();
   };
 
   handleHide = () => {
-    this.setState({ showForm: false });
+    this.setState(prevState => ({
+      ...prevState, showForm: false
+    }));
   };
 
   resetState = () => {
@@ -106,6 +141,7 @@ export class FacilityScene extends Component<{}, State> {
   };
 
   async componentDidMount() {
+    await this.loadMeta();
     await this.loadData();
   }
 
@@ -126,7 +162,8 @@ export class FacilityScene extends Component<{}, State> {
                 maximizable>
           {
             this.state.showForm ?
-              <FacilityForm facility={this.state.activeFacility} onSave={this.handleSave}
+              <FacilityForm facility={this.state.activeFacility} counties={this.state.counties} mechanisms={this.state.mechanisms}
+                            onSave={this.handleSave}
                        onDelete={this.handleDelete}
                        onCancel={this.handleCancel}/> :
               <div></div>

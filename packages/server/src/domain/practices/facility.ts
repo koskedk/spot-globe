@@ -32,6 +32,7 @@ export class Facility extends AggregateRoot {
   ) {
     this.code = code;
     this.name = name;
+    this.county = county;
     this.mechanism = mechanismId;
     this.apply(new FacilityUpdatedEvent(this._id));
   }

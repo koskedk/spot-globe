@@ -3,7 +3,7 @@ export interface MechanismDto {
     code?: string;
     name?: string;
     implementationName?: string;
-    agencyId?: string;
+    agency?: string;
     agencyName?: string;
     agencyDisplay?: string;
 }

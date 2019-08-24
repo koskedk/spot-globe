@@ -20,6 +20,7 @@ class Facility extends cqrs_1.AggregateRoot {
     changeDetails(code, name, county, mechanismId) {
         this.code = code;
         this.name = name;
+        this.county = county;
         this.mechanism = mechanismId;
         this.apply(new events_1.FacilityUpdatedEvent(this._id));
     }
