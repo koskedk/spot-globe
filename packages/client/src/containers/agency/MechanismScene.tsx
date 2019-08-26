@@ -15,8 +15,8 @@ interface State {
   agencies: Agency[]
 }
 
-const url = "./api/v1/practices/mechanisms/";
-const agenciesUrl = "./api/v1/practices/agencies/";
+const url = "http://localhost:4710/api/v1/practices/mechanisms/";
+const agenciesUrl = "http://localhost:4710/api/v1/practices/agencies/";
 
 export class MechanismScene extends Component<{}, State> {
   private messages: any;

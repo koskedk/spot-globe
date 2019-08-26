@@ -188,16 +188,19 @@ export class App extends Component<Props, State> {
     this.menu = [
       {
         label: "Partners", icon: "dashboard", command: () => {
-          window.location.href = "/";
+          window.location.hash = "/";
         }
       },
       {
         label: "Facilities", icon: "build", command: () => {
-          window.location.href = "/facility";
+          window.location.hash = "/globe/facility";
         }
       }
     ];
   };
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
+    console.error(error,errorInfo)
+  }
 
   render() {
 

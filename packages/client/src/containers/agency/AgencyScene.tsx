@@ -13,7 +13,7 @@ interface State {
   activeAgency: Agency
 }
 
-const url = "./api/v1/practices/agencies/";
+const url = "http://localhost:4710/api/v1/practices/agencies/";
 
 export class AgencyScene extends Component<{}, State> {
   private messages: any;
