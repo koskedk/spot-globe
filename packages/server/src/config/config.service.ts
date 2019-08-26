@@ -1,7 +1,8 @@
-import * as dotenv from "dotenv";
-import * as Joi from "@hapi/joi";
-import * as fs from "fs";
-import { MicroserviceOptions, Transport } from "@nestjs/microservices";
+import * as dotenv from 'dotenv';
+import * as Joi from '@hapi/joi';
+import * as fs from 'fs';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { Logger } from '@nestjs/common';
 
 export interface EnvConfig {
   [key: string]: string;
@@ -13,6 +14,7 @@ export class ConfigService {
   constructor(filePath: string) {
     const config = dotenv.parse(fs.readFileSync(filePath));
     this.envConfig = this.validateInput(config);
+    Logger.log(`running in ${filePath}`);
   }
 
   /**
@@ -22,19 +24,19 @@ export class ConfigService {
   private validateInput(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
       NODE_ENV: Joi.string()
-        .valid(["development", "production", "test", "provision"])
-        .default("development"),
+        .valid(['development', 'production', 'test', 'provision'])
+        .default('development'),
       GLOBE_PORT: Joi.number().default(4710),
-      GLOBE_RABBITMQ_HOST: Joi.string().default("amqp://localhost:5672/spot"),
-      GLOBE_RABBITMQ_USER: Joi.string().default("guest"),
-      GLOBE_RABBITMQ_PASS: Joi.string().default("guest"),
-      GLOBE_RABBITMQ_QUEUE: Joi.string().default("stats_queue"),
-      GLOBE_MONGODB_URI: Joi.string().default("mongodb://localhost/dwapiGlobe")
+      GLOBE_RABBITMQ_HOST: Joi.string().default('amqp://localhost:5672/spot'),
+      GLOBE_RABBITMQ_USER: Joi.string().default('guest'),
+      GLOBE_RABBITMQ_PASS: Joi.string().default('guest'),
+      GLOBE_RABBITMQ_QUEUE: Joi.string().default('stats_queue'),
+      GLOBE_MONGODB_URI: Joi.string().default('mongodb://localhost/dwapiGlobe'),
     });
 
     const { error, value: validatedEnvConfig } = Joi.validate(
       envConfig,
-      envVarsSchema
+      envVarsSchema,
     );
     if (error) {
       throw new Error(`Config validation error: ${error.message}`);
@@ -72,8 +74,10 @@ export class ConfigService {
       options: {
         urls: [this.QueueHost],
         queue: this.QueueName,
-        queueOptions: { durable: true }
-      }
+        user: this.QueueUser,
+        pass: this.QueuePassword,
+        queueOptions: { durable: true },
+      },
     };
   }
 }
