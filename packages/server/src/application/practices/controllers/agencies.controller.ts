@@ -24,7 +24,7 @@ export class AgenciesController {
     );
   }
 
-  @Delete(':_id')
+  @Delete(':id')
   async deleteAgency(@Param('id') id) {
     return this.commandBus.execute(new DeleteAgencyCommand(id));
   }

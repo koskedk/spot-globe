@@ -2,9 +2,9 @@ export interface FacilityDto {
   _id?: string;
   code?: number;
   name?: string;
-  countyId?: string;
+  county?: string;
   countyName?: string;
-  mechanismId?: string;
+  mechanism?: string;
   mechanismCode?: string;
   mechanismName?: string;
   agencyId?: string;

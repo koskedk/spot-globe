@@ -24,13 +24,13 @@ export class MechanismsController {
         mechanism.code,
         mechanism.name,
         mechanism.implementationName,
-        mechanism.agencyId,
+        mechanism.agency,
         mechanism._id,
       ),
     );
   }
 
-  @Delete(':_id')
+  @Delete(':id')
   async deleteMechanism(@Param('id') id) {
     return this.commandBus.execute(new DeleteMechanismCommand(id));
   }

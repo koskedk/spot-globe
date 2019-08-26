@@ -49,7 +49,7 @@ describe('Mechanisms Controller Tests', () => {
   });
 
   it('should create Mechanism', async () => {
-    const mechanismDto: MechanismDto = { code: 'Demo', name: 'Demo', implementationName: 'IMP', agencyId: null };
+    const mechanismDto: MechanismDto = { code: 'Demo', name: 'Demo', implementationName: 'IMP', agency: null };
     const result = await controller.createOrUpdateMechanism(mechanismDto);
     expect(result).not.toBeNull();
     Logger.debug(result);
