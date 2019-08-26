@@ -7,9 +7,9 @@ import { BaseRepository } from './base.repository';
 import { Model, Schema } from 'mongoose';
 import { TestDbHelper } from '../../../test/test-db.helper';
 import * as uuid from 'uuid';
-import { ConfigModule } from '../../../dist/config/config.module';
 import { DatabaseModule } from '../../database/database.module';
 import { ConfigService } from '../../config/config.service';
+import { ConfigModule } from '../../config/config.module';
 
 describe('Base Repository Tests', () => {
   process.env.NODE_ENV = 'test';
