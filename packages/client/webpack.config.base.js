@@ -53,12 +53,7 @@ module.exports = {
         }
       }
     }),
-
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.join(APP_PATH, "index.html"),
-      favicon: path.join(APP_PATH, "favicon.ico")
-    }),
     new ForkTsCheckerWebpackPlugin()
   ]
 };
