@@ -19,5 +19,6 @@ module.exports = {
       favicon: path.join(APP_PATH, "favicon.ico")
     }),
     new ForkTsCheckerWebpackPlugin()
-  ]
+  ],
+  ...base
 };
