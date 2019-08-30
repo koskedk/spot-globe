@@ -30,7 +30,7 @@ export class ConfigService {
       GLOBE_RABBITMQ_HOST: Joi.string().default('amqp://localhost:5672/spot'),
       GLOBE_RABBITMQ_USER: Joi.string().default('guest'),
       GLOBE_RABBITMQ_PASS: Joi.string().default('guest'),
-      GLOBE_RABBITMQ_QUEUE: Joi.string().default('stats_queue'),
+      GLOBE_RABBITMQ_QUEUE: Joi.string().default('globe_queue'),
       GLOBE_MONGODB_URI: Joi.string().default('mongodb://localhost/dwapiGlobe'),
     });
 

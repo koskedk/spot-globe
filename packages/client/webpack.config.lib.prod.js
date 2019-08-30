@@ -12,5 +12,15 @@ module.exports = {
     libraryTarget: "amd",
     path: PUB_PATH
   },
-  ...base
+  ...base,
+  externals: [
+    /^lodash$/,
+    /^single-spa$/,
+    /^react$/,
+    /^react\/lib.*/,
+    /^react-dom$/,
+    /.*react-dom.*/,
+    /^rxjs\/?.*$/,
+    /^prime$/,
+  ],
 };
