@@ -6,7 +6,7 @@ export class AppController {
   getAppName(): string {
     return 'dwapi Globe';
   }
-  @Get('/wwwroot/globe.js')
+  @Get('globe')
   getLib(@Res() res): string {
     Logger.log(__dirname + '/wwwroot/globe.js');
     return res.sendFile(__dirname + '/wwwroot/globe.js');
