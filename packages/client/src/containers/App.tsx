@@ -1,28 +1,34 @@
 import React from "react";
 import { Component } from "react";
 import { AppMenu } from "../components/AppMenu";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  HashRouter,
+  Switch
+} from "react-router-dom";
 import "./App.css";
 import { FacilityHome } from "./mfl/FacilityHome";
 import { AgencyHome } from "./agency/AgencyHome";
 
 interface Props {
-  menuClick?: boolean
-  horizontal?: boolean
+  menuClick?: boolean;
+  horizontal?: boolean;
 }
 
 interface State {
-  layoutMode: string,
-  profileMode: string,
-  overlayMenuActive: boolean,
-  staticMenuDesktopInactive: boolean,
-  staticMenuMobileActive: boolean,
-  rotateMenuButton: boolean,
-  topbarMenuActive: boolean,
-  activeTopbarItem: any,
-  darkMenu: boolean,
-  rightPanelActive: boolean,
-  menuActive: boolean
+  layoutMode: string;
+  profileMode: string;
+  overlayMenuActive: boolean;
+  staticMenuDesktopInactive: boolean;
+  staticMenuMobileActive: boolean;
+  rotateMenuButton: boolean;
+  topbarMenuActive: boolean;
+  activeTopbarItem: any;
+  darkMenu: boolean;
+  rightPanelActive: boolean;
+  menuActive: boolean;
 }
 
 export class App extends Component<Props, State> {
@@ -32,7 +38,6 @@ export class App extends Component<Props, State> {
   private menuClick: boolean = false;
   private layoutMenuScroller: any;
   private layoutContainer: any;
-
 
   constructor(props: Readonly<Props>) {
     super(props);
@@ -64,10 +69,10 @@ export class App extends Component<Props, State> {
 
   onMenuButtonClick = (event: any) => {
     this.menuClick = true;
-    this.setState(({
+    this.setState({
       rotateMenuButton: !this.state.rotateMenuButton,
       topbarMenuActive: false
-    }));
+    });
 
     if (this.state.layoutMode === "overlay") {
       this.setState({
@@ -75,9 +80,13 @@ export class App extends Component<Props, State> {
       });
     } else {
       if (this.isDesktop())
-        this.setState({ staticMenuDesktopInactive: !this.state.staticMenuDesktopInactive });
+        this.setState({
+          staticMenuDesktopInactive: !this.state.staticMenuDesktopInactive
+        });
       else
-        this.setState({ staticMenuMobileActive: !this.state.staticMenuMobileActive });
+        this.setState({
+          staticMenuMobileActive: !this.state.staticMenuMobileActive
+        });
     }
 
     event.preventDefault();
@@ -95,8 +104,7 @@ export class App extends Component<Props, State> {
 
     if (this.state.activeTopbarItem === event.item)
       this.setState({ activeTopbarItem: null });
-    else
-      this.setState({ activeTopbarItem: event.item });
+    else this.setState({ activeTopbarItem: event.item });
 
     event.originalEvent.preventDefault();
   };
@@ -187,39 +195,56 @@ export class App extends Component<Props, State> {
   createMenu = () => {
     this.menu = [
       {
-        label: "Partners", icon: "dashboard", command: () => {
-          window.location.hash = "/";
+        label: "Partners",
+        icon: "dashboard",
+        command: () => {
+          window.location.hash = "/globe";
         }
       },
       {
-        label: "Facilities", icon: "build", command: () => {
+        label: "Facilities",
+        icon: "build",
+        command: () => {
           window.location.hash = "/globe/facility";
         }
       }
     ];
   };
+
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
-    console.error(error,errorInfo)
+    console.error(error, errorInfo);
   }
 
   render() {
-
     return (
       <div className="layout-wrapper" onClick={this.onDocumentClick}>
-        <div ref={(el) => this.layoutContainer = el} className='layout-container menu-layout-horizontal'>
-
-          <div className='layout-menu' onClick={this.onMenuClick}>
-            <AppMenu model={this.menu} onMenuItemClick={this.onMenuItemClick}
-                     onRootMenuItemClick={this.onRootMenuItemClick}
-                     layoutMode={this.state.layoutMode} active={this.state.menuActive}/>
+        <div
+          ref={el => (this.layoutContainer = el)}
+          className="layout-container menu-layout-horizontal"
+        >
+          <div className="layout-menu" onClick={this.onMenuClick}>
+            <AppMenu
+              model={this.menu}
+              onMenuItemClick={this.onMenuItemClick}
+              onRootMenuItemClick={this.onRootMenuItemClick}
+              layoutMode={this.state.layoutMode}
+              active={this.state.menuActive}
+            />
           </div>
 
           <div className="layout-main">
             <div className="layout-content">
-              <Router>
-                <Route path="/" exact component={AgencyHome}/>
-                <Route path="/facility" exact component={FacilityHome}/>
-              </Router>
+              <HashRouter>
+                <Switch>
+                  <Route exact path="/globe" component={AgencyHome} />
+                  <Route
+                    path="/globe/facility/"
+                    exact
+                    component={FacilityHome}
+                  />
+                  <Route path="*" component={AgencyHome} />
+                </Switch>
+              </HashRouter>
             </div>
           </div>
           <div className="layout-mask"></div>

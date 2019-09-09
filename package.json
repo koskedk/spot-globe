@@ -1,14 +1,21 @@
 {
   "private": true,
   "name": "spot-globe",
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "client": "yarn workspace @spot-globe/client start",
     "client:app": "yarn workspace @spot-globe/client start:app",
+    "client:build": "yarn workspace @spot-globe/client build",
     "server": "yarn workspace @spot-globe/server start",
+    "server:prod": "yarn workspace @spot-globe/server start:prod",
+    "server:build": "yarn workspace @spot-globe/server build",
     "server:dev": "yarn workspace @spot-globe/server start:dev",
     "test": "yarn workspace @spot-globe/server test",
+    "build": "yarn server:build && yarn client:build",
     "start": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\"",
+    "start:prod": "concurrently --kill-others-on-fail \"yarn server:prod\"  \"yarn client\"",
     "start:dev": "concurrently --kill-others-on-fail \"yarn server:dev\"  \"yarn client:app\""
   },
   "dependencies": {
