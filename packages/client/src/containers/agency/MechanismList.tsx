@@ -42,7 +42,7 @@ export class MechanismList extends Component<Props, {}> {
         <DataTable value={this.props.mechanisms} header={header}>
           <Column field="code" header="Code"/>
           <Column field="name" header="Name"/>
-          <Column field="implementationName" header="Implementation"/>
+          <Column field="implementationName" header="Implementation Name"/>
           <Column field="agency.Name" header="Agency"/>
           <Column body={this.manageTemplate} style={{ textAlign: "center", width: "5em" }}/>
         </DataTable>
