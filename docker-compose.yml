@@ -1,0 +1,41 @@
+version: "2"
+
+services:
+
+  spot-globe:
+
+    image: kenyahmis/globe:V2
+
+    container_name: spot-globe
+
+    restart: always
+
+    ports:
+
+      - 4710:4710
+
+    networks:
+
+      - spot
+
+    volumes:
+
+      - spotGlobe-volume:/var/lib/spotGlobe  
+
+networks:
+
+  spot:
+
+
+
+volumes:
+
+  spotGlobe-volume:
+
+    external: true
+ 
+  spotStats-volume:
+
+    external: true
+
+
