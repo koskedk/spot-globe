@@ -23,21 +23,24 @@ export class FacilityRepository extends BaseRepository<Facility>
     return result;
   }
 
-  async getFacilities(mechanismId?: string): Promise<any[]> {
-    let results = [];
+  async getFacilities(
+    size: number,
+    page: number,
+    mechanismId?: string,
+  ): Promise<any[]> {
+    let results: any;
+
     if (mechanismId) {
-      results = await this.model
-        .find({ mechanism: mechanismId })
-        .populate(Mechanism.name.toLowerCase())
-        .populate(County.name.toLowerCase())
-        .exec();
+      results = this.model.find({ mechanism: mechanismId });
     } else {
-      results = await this.model
-        .find()
-        .populate(Mechanism.name.toLowerCase())
-        .populate(County.name.toLowerCase())
-        .exec();
+      results = this.model.find();
     }
-    return results;
+
+    return results
+      .populate(Mechanism.name.toLowerCase())
+      .populate(County.name.toLowerCase())
+      .skip(size * (page - 1))
+      .limit(size)
+      .exec();
   }
 }

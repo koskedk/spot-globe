@@ -10,15 +10,13 @@ export class SaveAgencyHandler implements ICommandHandler<SaveAgencyCommand> {
   constructor(
     @Inject('IAgencyRepository')
     private readonly agencyRepository: IAgencyRepository,
-    private readonly publisher: EventPublisher) {
-  }
+    private readonly publisher: EventPublisher,
+  ) {}
 
   async execute(command: SaveAgencyCommand): Promise<any> {
-
     if (command._id && command._id !== '00000000-0000-0000-0000-000000000000') {
       return await this.updateAgency(command);
     }
-
     return await this.createAgency(command);
   }
 

@@ -3,12 +3,15 @@ import { Inject, Logger } from '@nestjs/common';
 import { AgencyUpdatedEvent } from '../agency-updated.event';
 import { IAgencyRepository } from '../../../../domain/practices/agency-repository.interface';
 import { ClientProxy } from '@nestjs/microservices';
+import { MessagingService } from '../../../../infrastructure/messging/messaging.service';
+import { ConfigService } from '../../../../config/config.service';
 
 @EventsHandler(AgencyUpdatedEvent)
 export class AgencyUpdatedEventHandler
   implements IEventHandler<AgencyUpdatedEvent> {
   constructor(
-    @Inject('GLOBE_SERVICE') private readonly client: ClientProxy,
+    private readonly configService: ConfigService,
+    private readonly messagingService: MessagingService,
     @Inject('IAgencyRepository')
     private readonly agencyRepository: IAgencyRepository,
   ) {}
@@ -16,12 +19,21 @@ export class AgencyUpdatedEventHandler
   async handle(event: AgencyUpdatedEvent) {
     Logger.debug(`=== AgencyUpdated ===:${event._id}`);
     const agency = await this.agencyRepository.getById(event._id);
-    if (agency) {
-      await this.client
-        .emit(AgencyUpdatedEvent.name, JSON.stringify(agency))
-        .toPromise()
-        .catch(err => Logger.error(err));
-      Logger.debug(`*** AgencyUpdated Published ****:${event._id}`);
+    const route = this.configService.QueueGlobeRoutes.find(c =>
+      c.includes('practice'),
+    );
+
+    if (route && agency) {
+      try {
+        await this.messagingService.publish(
+          { label: AgencyUpdatedEvent.name, body: agency },
+          this.configService.QueueGlobeExchange,
+          route,
+        );
+        Logger.debug(`*** AgencyUpdated Published ****:${event._id}`);
+      } catch (e) {
+        Logger.error(e);
+      }
     }
   }
 }

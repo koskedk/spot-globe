@@ -9,10 +9,11 @@ export interface IRepository<T> {
 
   getAll(criteria?: any): Promise<T[]>;
 
+  getAllPaged(size: number, page: number, criteria?: any): Promise<T[]>;
+
   delete(tid: any): Promise<boolean>;
 
   getCount(): Promise<number>;
 
   getModel(): any;
 }
-

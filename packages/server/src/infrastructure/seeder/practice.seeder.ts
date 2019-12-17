@@ -13,39 +13,48 @@ import { IFacilityRepository } from '../../domain/practices/facility-repository.
 
 @Injectable()
 export class PracticeSeeder {
+  constructor(
+    private readonly reader: SeedReader,
+    @Inject('IAgencyRepository')
+    private readonly agencyRepository: IAgencyRepository,
+    @Inject('IMechanismRepository')
+    private readonly mechanismRepository: IMechanismRepository,
+    @Inject('IFacilityRepository')
+    private readonly facilityRepository: IFacilityRepository,
+  ) {}
 
-  constructor(private readonly reader: SeedReader,
-              @Inject('IAgencyRepository')
-              private readonly agencyRepository: IAgencyRepository,
-              @Inject('IMechanismRepository')
-              private readonly mechanismRepository: IMechanismRepository,
-              @Inject('IFacilityRepository')
-              private readonly facilityRepository: IFacilityRepository) {
-  }
-
-  async loadAgencies(): Promise<Agency[]> {
-    const seedData = await this.reader.read(Agency.name.toLowerCase());
+  async loadAgencies(name?: string): Promise<Agency[]> {
+    const seedData = await this.reader.read(
+      name ? `${Agency.name.toLowerCase()}.${name}` : Agency.name.toLowerCase(),
+    );
     const agencies = deserializeArray(Agency, seedData);
     return agencies;
   }
 
-  async loadFacilities(): Promise<Facility[]> {
-    const seedData = await this.reader.read(Facility.name.toLowerCase());
+  async loadFacilities(name?: string): Promise<Facility[]> {
+    const seedData = await this.reader.read(
+      name
+        ? `${Facility.name.toLowerCase()}.${name}`
+        : Facility.name.toLowerCase(),
+    );
     const facilities = deserializeArray(Facility, seedData);
     return facilities;
   }
 
-  async loadMechanisms(): Promise<Mechanism[]> {
-    const seedData = await this.reader.read(Mechanism.name.toLowerCase());
+  async loadMechanisms(name?: string): Promise<Mechanism[]> {
+    const seedData = await this.reader.read(
+      name
+        ? `${Mechanism.name.toLowerCase()}.${name}`
+        : Mechanism.name.toLowerCase(),
+    );
     const mechanisms = deserializeArray(Mechanism, seedData);
     return mechanisms;
   }
 
-  async seed(): Promise<number> {
-
-    const agencies = await this.loadAgencies();
-    const mechanisms = await this.loadMechanisms();
-    const facilities = await this.loadFacilities();
+  async seed(name?: string): Promise<number> {
+    const agencies = await this.loadAgencies(name);
+    const mechanisms = await this.loadMechanisms(name);
+    const facilities = await this.loadFacilities(name);
 
     const ggenciesCount = await this.agencyRepository.getCount();
     if (ggenciesCount === 0) {
@@ -66,5 +75,4 @@ export class PracticeSeeder {
     }
     return 0;
   }
-
 }

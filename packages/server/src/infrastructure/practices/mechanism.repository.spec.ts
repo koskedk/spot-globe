@@ -46,18 +46,15 @@ describe('Mechanism Repository  Tests', () => {
     const fac = await repository.getById(mechanisms[0]._id);
     expect(fac.agency.name).not.toBeNull();
     expect(fac.facilities.length).toBeGreaterThan(0);
-    Logger.debug(fac);
   });
 
   it('should load Mechanisms', async () => {
     const data = await repository.getMechanisms();
     expect(data.length).toBeGreaterThan(0);
-    data.map(f => Logger.debug(f));
   });
 
   it('should load Mechanisms by Agency', async () => {
     const data = await repository.getMechanisms(agencies[0]._id);
     expect(data.length).toBeGreaterThan(0);
-    data.map(f => Logger.debug(f));
   });
 });
