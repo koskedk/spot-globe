@@ -13,7 +13,7 @@ interface State {
   activeAgency: Agency;
 }
 
-const url = `http://${window.location.hostname}:4710/api/v1/practices/agencies/`;
+const url = `https://${window.location.hostname}:4710/api/v1/practices/agencies/`;
 
 export class AgencyScene extends Component<{}, State> {
   private messages: any;

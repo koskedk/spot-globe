@@ -1,4 +1,4 @@
-import {  Logger } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { LocationSeeder } from './location.seeder';
 import { TestDbHelper } from '../../../test/test-db.helper';
@@ -29,8 +29,7 @@ describe('Location Seeder Tests', () => {
   });
 
   it('should load County Seed', async () => {
-    const seeds = await seeder.load();
+    const seeds = await seeder.load('test');
     expect(seeds.length).toBeGreaterThan(-1);
-    seeds.forEach(s => Logger.debug(`${s.code} ${s} (${s._id})`));
   });
 });

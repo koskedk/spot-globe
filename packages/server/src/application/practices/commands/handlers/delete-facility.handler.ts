@@ -5,12 +5,13 @@ import { Inject } from '@nestjs/common';
 import { IFacilityRepository } from '../../../../domain/practices/facility-repository.interface';
 
 @CommandHandler(DeleteFacilityCommand)
-export class DeleteFacilityHandler implements ICommandHandler<DeleteFacilityCommand> {
+export class DeleteFacilityHandler
+  implements ICommandHandler<DeleteFacilityCommand> {
   constructor(
     @Inject('IFacilityRepository')
     private readonly facilityRepository: IFacilityRepository,
-    private readonly eventBus: EventBus) {
-  }
+    private readonly eventBus: EventBus,
+  ) {}
 
   async execute(command: DeleteFacilityCommand): Promise<boolean> {
     const result = await this.facilityRepository.delete(command._id);

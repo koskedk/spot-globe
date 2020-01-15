@@ -12,6 +12,7 @@ import { GetFacilitiesQuery } from '../queries/get-facilities.query';
 import { GetFacilitiesHandler } from '../queries/handlers/get-facilities.handler';
 import { PracticesModule } from '../practices.module';
 import { FacilityDto } from '../../../domain/practices/dtos/facility.dto';
+import { LocationsInfrastructureModule } from '../../../infrastructure/locations';
 
 describe('Facilities Controller Tests', () => {
   let module: TestingModule;
@@ -24,6 +25,7 @@ describe('Facilities Controller Tests', () => {
     module = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot(dbHelper.url, dbHelper.options),
+        LocationsInfrastructureModule,
         PracticesModule,
       ],
     }).compile();
@@ -32,11 +34,15 @@ describe('Facilities Controller Tests', () => {
     await dbHelper.initConnection();
     await dbHelper.seedDb('facilities', testFacilities);
 
-    const saveFacilityHandler = module.get<SaveFacilityHandler>(SaveFacilityHandler);
+    const saveFacilityHandler = module.get<SaveFacilityHandler>(
+      SaveFacilityHandler,
+    );
     const commandBus = module.get<CommandBus>(CommandBus);
     commandBus.bind(saveFacilityHandler, SaveFacilityCommand.name);
 
-    const getFacilitiesHandler = module.get<GetFacilitiesHandler>(GetFacilitiesHandler);
+    const getFacilitiesHandler = module.get<GetFacilitiesHandler>(
+      GetFacilitiesHandler,
+    );
     const queryBus = module.get<QueryBus>(QueryBus);
     queryBus.bind(getFacilitiesHandler, GetFacilitiesQuery.name);
 
@@ -56,7 +62,7 @@ describe('Facilities Controller Tests', () => {
   });
 
   it('should get All Facilities', async () => {
-    const result = await controller.getFacilities();
+    const result = await controller.getFacilities(1, 1);
     expect(result.length).toBeGreaterThan(0);
     result.forEach(c => Logger.debug(`${c}`));
   });

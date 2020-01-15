@@ -2,12 +2,12 @@ import * as dotenv from 'dotenv';
 import * as Joi from '@hapi/joi';
 import * as fs from 'fs';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 
 export interface EnvConfig {
   [key: string]: string;
 }
-
+@Injectable()
 export class ConfigService {
   private readonly envConfig: EnvConfig;
 
@@ -27,11 +27,18 @@ export class ConfigService {
         .valid(['development', 'production', 'test', 'provision'])
         .default('development'),
       GLOBE_PORT: Joi.number().default(4710),
-      GLOBE_RABBITMQ_HOST: Joi.string().default('amqp://localhost:5672/spot'),
-      GLOBE_RABBITMQ_USER: Joi.string().default('guest'),
-      GLOBE_RABBITMQ_PASS: Joi.string().default('guest'),
-      GLOBE_RABBITMQ_QUEUE: Joi.string().default('globe_queue'),
+
+      GLOBE_RABBITMQ_URI: Joi.string().default(
+        'amqp://guest:guest@localhost:5672/spot',
+      ),
+      GLOBE_RABBITMQ_EXCHANGE: Joi.string().default('globe.exchange'),
+      GLOBE_RABBITMQ_EXCHANGE_TYPE: Joi.string().default('direct'),
+      GLOBE_RABBITMQ_ROUTES: Joi.string().default('practice.route'),
+      GLOBE_RABBITMQ_QUEUES: Joi.string().default('practice.queue'),
+
       GLOBE_MONGODB_URI: Joi.string().default('mongodb://localhost/dwapiGlobe'),
+      GLOBE_KEY: Joi.string().default('koskedk.com+5-key.pem'),
+      GLOBE_CERT: Joi.string().default('koskedk.com+5.pem'),
     });
 
     const { error, value: validatedEnvConfig } = Joi.validate(
@@ -48,36 +55,33 @@ export class ConfigService {
     return Number(this.envConfig.GLOBE_PORT);
   }
 
-  get QueueHost(): string {
-    return String(this.envConfig.GLOBE_RABBITMQ_HOST);
+  get QueueGlobeUri(): string {
+    return String(this.envConfig.GLOBE_RABBITMQ_URI);
   }
 
-  get QueueUser(): string {
-    return String(this.envConfig.GLOBE_RABBITMQ_USER);
+  get QueueGlobeExchange(): string {
+    return String(this.envConfig.GLOBE_RABBITMQ_EXCHANGE);
   }
 
-  get QueuePassword(): string {
-    return String(this.envConfig.GLOBE_RABBITMQ_PASS);
+  get QueueGlobeExchangeType(): string {
+    return String(this.envConfig.GLOBE_RABBITMQ_EXCHANGE_TYPE);
   }
 
-  get QueueName(): string {
-    return String(this.envConfig.GLOBE_RABBITMQ_QUEUE);
+  get QueueGlobeRoutes(): string[] {
+    return this.envConfig.GLOBE_RABBITMQ_ROUTES.split('|');
+  }
+  get QueueGlobeQueues(): string[] {
+    return this.envConfig.GLOBE_RABBITMQ_QUEUES.split('|');
   }
 
   get Database(): string {
     return String(this.envConfig.GLOBE_MONGODB_URI);
   }
 
-  get QueueConfig(): any {
-    return {
-      transport: Transport.RMQ,
-      options: {
-        urls: [this.QueueHost],
-        queue: this.QueueName,
-        user: this.QueueUser,
-        pass: this.QueuePassword,
-        queueOptions: { durable: true },
-      },
-    };
+  get SslKey(): string {
+    return String(this.envConfig.GLOBE_KEY);
+  }
+  get SslCert(): string {
+    return String(this.envConfig.GLOBE_CERT);
   }
 }

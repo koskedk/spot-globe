@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
-import { ClientsModule, Transport } from '@nestjs/microservices';
 import { PracticesInfrastructureModule } from '../../infrastructure/practices';
 import {
   AgencyCreatedEventHandler,
@@ -29,13 +28,17 @@ import {
 import { DeleteAgencyHandler } from './commands/handlers/delete-agency.handler';
 import { SaveMechanismHandler } from './commands/handlers/save-mechanism.handler';
 import { DeleteMechanismHandler } from './commands/handlers/delete-mechanism.handler';
-import { MessagingModule } from "../../infrastructure/messging/messaging.module";
+import { ConfigModule } from '../../config/config.module';
+import { MessagingModule } from '../../infrastructure/messging/messaging.module';
+import { GetFacilitiesCountQuery } from './queries/get-facilities-count.query';
+import { GetFacilitiesCountHandler } from './queries/handlers/get-facilities-count.handler';
 
 @Module({
   imports: [
     CqrsModule,
-    MessagingModule,
     PracticesInfrastructureModule,
+    ConfigModule,
+    MessagingModule,
   ],
   controllers: [AgenciesController, FacilitiesController, MechanismsController],
   providers: [
@@ -48,6 +51,7 @@ import { MessagingModule } from "../../infrastructure/messging/messaging.module"
     GetAgenciesHandler,
     GetMechanismsHandler,
     GetFacilitiesHandler,
+    GetFacilitiesCountHandler,
     AgencyCreatedEventHandler,
     AgencyDeletedEventHandler,
     AgencyUpdatedEventHandler,

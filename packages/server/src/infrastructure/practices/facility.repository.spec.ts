@@ -48,18 +48,15 @@ describe('Facility Repository Test', () => {
     const fac = await repository.getById(facilities[0]._id);
     expect(fac.county.name).not.toBeNull();
     expect(fac.mechanism.name).not.toBeNull();
-    Logger.debug(fac);
   });
 
   it('should load Facilities', async () => {
-    const facs = await repository.getFacilities();
+    const facs = await repository.getFacilities(1, 1);
     expect(facs.length).toBeGreaterThan(0);
-    facs.map(f => Logger.debug(f));
   });
 
   it('should load Facilities by Mechanism', async () => {
-    const facs = await repository.getFacilities(mechanisms[0]._id);
+    const facs = await repository.getFacilities(1, 1, mechanisms[0]._id);
     expect(facs.length).toBeGreaterThan(0);
-    facs.map(f => Logger.debug(f));
   });
 });

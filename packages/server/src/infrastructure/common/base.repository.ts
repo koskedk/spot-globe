@@ -37,6 +37,21 @@ export abstract class BaseRepository<T> implements IRepository<T> {
     return this.model.find().exec();
   }
 
+  getAllPaged(size: number, page: number, criteria?: any): Promise<T[]> {
+    let query: any;
+
+    if (criteria) {
+      query = this.model.find(criteria);
+    } else {
+      query = this.model.find();
+    }
+
+    return query
+      .skip(size * (page - 1))
+      .limit(size)
+      .exec();
+  }
+
   async delete(tid: any) {
     await this.model.deleteOne({ _id: tid }).exec();
     return true;
