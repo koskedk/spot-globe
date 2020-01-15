@@ -9,15 +9,15 @@ export const messagingProviders = [
     useFactory: async (config: ConfigService) => ({
       exchanges: [
         {
-          name: config.QueueStatsExchange,
-          type: config.QueueStatsExchangeType,
+          name: config.QueueGlobeExchange,
+          type: config.QueueGlobeExchangeType,
         },
         {
           name: config.QueueGlobeExchange,
           type: config.QueueGlobeExchangeType,
         },
       ],
-      uri: config.QueueStatsUri,
+      uri: config.QueueGlobeUri,
     }),
   }),
 ];
