@@ -7,25 +7,37 @@ import {
   IFacilityRepository,
 } from '../../../../domain/practices';
 import { AgencyUpdatedEvent } from '../agency-updated.event';
+import { MessagingService } from '../../../../infrastructure/messging/messaging.service';
+import { ConfigService } from '../../../../config/config.service';
 
 @EventsHandler(FacilityCreatedEvent)
 export class FacilityCreatedEventHandler
   implements IEventHandler<FacilityCreatedEvent> {
   constructor(
-    @Inject('GLOBE_SERVICE') private readonly client: ClientProxy,
+    private readonly configService: ConfigService,
+    private readonly messagingService: MessagingService,
     @Inject('IFacilityRepository')
     private readonly repository: IFacilityRepository,
   ) {}
 
   async handle(event: FacilityCreatedEvent) {
     Logger.debug(`=== FacilityCreated ===:${event._id}`);
-    const agency = await this.repository.getById(event._id);
-    if (agency) {
-      await this.client
-        .emit(FacilityCreatedEvent.name, JSON.stringify(agency))
-        .toPromise()
-        .catch(err => Logger.error(err));
-      Logger.debug(`*** FacilityCreated Published ****:${event._id}`);
+    const facility = await this.repository.getById(event._id);
+    const route = this.configService.QueueGlobeRoutes.find(c =>
+      c.includes('practice'),
+    );
+
+    if (route && facility) {
+      try {
+        await this.messagingService.publish(
+          { label: FacilityCreatedEvent.name, body: facility },
+          this.configService.QueueGlobeExchange,
+          route,
+        );
+        Logger.debug(`*** FacilityUpdated Published ****:${event._id}`);
+      } catch (e) {
+        Logger.error(e);
+      }
     }
   }
 }

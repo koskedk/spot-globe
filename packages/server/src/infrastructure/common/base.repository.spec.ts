@@ -29,7 +29,7 @@ describe('Base Repository Tests', () => {
       providers: [CarRepository],
     }).compile();
     const config = module.get(ConfigService);
-    testCars = getTestCars(5);
+    testCars = getTestCars(6);
     await dbHelper.initConnection();
     await dbHelper.seedDb('cars', testCars);
     repository = module.get<CarRepository>(CarRepository);
@@ -49,14 +49,14 @@ describe('Base Repository Tests', () => {
     const car = new Car('Toyota');
     const result = await repository.create(car);
     expect(result).not.toBeNull();
-    Logger.debug(result);
+    // Logger.debug(result);
   });
 
   it('should create Batch entitie', async () => {
     const cars: Car[] = [new Car('Merc'), new Car('Sub')];
     const result = await repository.createBatch(cars);
     expect(result).toBeGreaterThan(0);
-    Logger.debug(`Created:${result}`);
+    // Logger.debug(`Created:${result}`);
   });
 
   it('should update Entity', async () => {
@@ -67,19 +67,33 @@ describe('Base Repository Tests', () => {
     expect(updated).not.toBeNull();
     expect(updated.name).toBe('xyz');
     expect(updated._id).toBe(liveCar._id);
-    Logger.debug(updated);
+    // Logger.debug(updated);
   });
 
   it('should get Entity by Id', async () => {
     const car = await repository.get(liveCar._id);
     expect(car).not.toBeNull();
-    Logger.debug(car);
+    // Logger.debug(car);
   });
 
   it('should get Entities', async () => {
     const cars = await repository.getAll();
     expect(cars.length).toBeGreaterThan(0);
     cars.forEach(c => Logger.debug(`${c}`));
+  });
+
+  it('should get Paged Entities', async () => {
+    const cars = await repository.getAllPaged(2, 1);
+    expect(cars.length).toBe(2);
+    //cars.forEach(c => Logger.debug(`${c}`));
+
+    const carsPg2 = await repository.getAllPaged(2, 2);
+    expect(carsPg2.length).toBe(2);
+    //carsPg2.forEach(c => Logger.debug(`${c}`));
+
+    const carsPg3 = await repository.getAllPaged(2, 3);
+    expect(carsPg3.length).toBe(2);
+    //carsPg3.forEach(c => Logger.debug(`${c}`));
   });
 
   it('should get Entity by Criteria', async () => {
@@ -96,7 +110,7 @@ describe('Base Repository Tests', () => {
   it('should get Count', async () => {
     const result = await repository.getCount();
     expect(result).toBeGreaterThan(0);
-    Logger.debug(`Total:${result}`);
+    // Logger.debug(`Total:${result}`);
   });
 });
 

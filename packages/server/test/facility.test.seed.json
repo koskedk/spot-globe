@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "8c7c5e82-5d6b-4d99-abcd-be3514fc92cb",
+    "code": 10001,
+    "name": "Abel Migwi Johana Laboratory",
+    "county": "9eb15f60-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "mechanism": ""
+  },
+  {
+    "_id": "ccce6905-b8df-4921-90f5-4433164f1d4b",
+    "code": 10002,
+    "name": "Aberdare Medical & Surgical Clinic",
+    "county": "9eb15e34-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "mechanism": ""
+  }
+]

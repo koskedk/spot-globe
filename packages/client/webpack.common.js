@@ -1,12 +1,9 @@
-const webpack = require("webpack");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
 const APP_PATH = path.resolve(__dirname, "src");
-
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = {
   resolve: {
@@ -25,7 +22,10 @@ module.exports = {
     ]
   },
   devServer: {
+    https: true,
+    port: 4711,
     host: "0.0.0.0",
+    publicPath: "/",
     historyApiFallback: true,
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -34,26 +34,10 @@ module.exports = {
         "X-Requested-With, content-type, Authorization"
     },
     proxy: {
-      "/api": "http://localhost:4710"
-    },
-    port: 4711
+      "/api": "https://localhost:4710"
+    }
   },
   devtool: "source-map",
   externals: [],
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: "styles/[name].[contenthash].css"
-    }),
-
-    // Compress CSS files
-    new OptimizeCssAssetsPlugin({
-      cssProcessorOptions: {
-        map: {
-          inline: false
-        }
-      }
-    }),
-    new CleanWebpackPlugin(),
-    new ForkTsCheckerWebpackPlugin()
-  ]
+  plugins: [new CleanWebpackPlugin(), new ForkTsCheckerWebpackPlugin()]
 };

@@ -5,12 +5,18 @@ import { Button } from "primereact/button";
 import { Facility } from "./models/facility";
 
 interface Props {
-  facilities: Facility[]
-  onManage: any
-  onAdd: any
+  facilities: Facility[];
+  onManage: any;
+  onAdd: any;
+  onPage: any;
+  onSort: any;
+  onFilter: any;
+  loading: boolean;
+  totalRecords: number;
+  rows: number;
+  first: number;
 }
 export class FacilityList extends Component<Props, {}> {
-
   constructor(props: Readonly<Props>) {
     super(props);
   }
@@ -28,24 +34,64 @@ export class FacilityList extends Component<Props, {}> {
   manageTemplate = (rowData: any, column: any) => {
     return (
       <div>
-        <Button icon="pi pi-external-link" onClick={(event) => this.manageAction(event, rowData)}></Button>
-      </div>);
+        <Button
+          disabled={true}
+          icon="pi pi-external-link"
+          onClick={event => this.manageAction(event, rowData)}
+        ></Button>
+      </div>
+    );
   };
 
   render() {
-    const header = <div className="p-clearfix" style={{ "lineHeight": "1.87em" }}>Facilitiys <Button
-      onClick={this.addAction} icon="pi pi-plus" style={{ "float": "right" }}/></div>;
-
+    const header = (
+      <div className="p-clearfix" style={{ lineHeight: "1.87em" }}>
+        Facilitiys{" "}
+        <Button
+          disabled={true}
+          onClick={this.addAction}
+          icon="pi pi-plus"
+          style={{ float: "right" }}
+        />
+      </div>
+    );
 
     return (
       <div>
-        <DataTable value={this.props.facilities} header={header}>
-          <Column field="code" header="Code"/>
-          <Column field="name" header="Name"/>
-          <Column field="county.name" header="Implementation"/>
-          <Column field="agency.name" header="Agency"/>
-          <Column body={this.manageTemplate} style={{ textAlign: "center", width: "5em" }}/>
+        <DataTable
+          value={this.props.facilities}
+          header={header}
+          loading={this.props.loading}
+          paginator={true}
+          rows={this.props.rows}
+          rowsPerPageOptions={[50, 100, 200, 500]}
+          totalRecords={this.props.totalRecords}
+          lazy={true}
+          onPage={this.props.onPage}
+          first={this.props.first}
+          onSort={this.props.onSort}
+          onFilter={this.props.onFilter}
+        >
+          <Column field="code" header="Code" sortable={true} filter={true} />
+          <Column field="name" header="Name" sortable={true} filter={true} />
+          <Column
+            field="county.name"
+            header="County"
+            sortable={true}
+            filter={true}
+          />
+          <Column
+            field="agency.name"
+            header="Agency"
+            sortable={true}
+            filter={true}
+          />
+          <Column
+            body={this.manageTemplate}
+            style={{ textAlign: "center", width: "5em" }}
+          />
         </DataTable>
-      </div>);
+      </div>
+    );
   }
 }

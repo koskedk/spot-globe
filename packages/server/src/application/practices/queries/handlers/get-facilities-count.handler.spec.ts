@@ -12,8 +12,10 @@ import { getTestFacilities } from '../../../../../test/test.data';
 import { QueryBus } from '@nestjs/cqrs';
 import { PracticesInfrastructureModule } from '../../../../infrastructure/practices';
 import { LocationsInfrastructureModule } from '../../../../infrastructure/locations';
+import { GetFacilitiesCountHandler } from './get-facilities-count.handler';
+import { GetFacilitiesCountQuery } from '../get-facilities-count.query';
 
-describe('Get Facility Query Tests', () => {
+describe('Get Facility Count Query Tests', () => {
   let module: TestingModule;
   let queryBus: QueryBus;
   let testFacilities: Facility[] = [];
@@ -33,12 +35,12 @@ describe('Get Facility Query Tests', () => {
     await dbHelper.initConnection();
     await dbHelper.seedDb('facilities', testFacilities);
 
-    const saveFacilityHandler = module.get<GetFacilitiesHandler>(
-      GetFacilitiesHandler,
+    const saveFacilityHandler = module.get<GetFacilitiesCountHandler>(
+      GetFacilitiesCountHandler,
     );
 
     queryBus = module.get<QueryBus>(QueryBus);
-    queryBus.bind(saveFacilityHandler, GetFacilitiesQuery.name);
+    queryBus.bind(saveFacilityHandler, GetFacilitiesCountQuery.name);
   });
 
   afterAll(async () => {
@@ -51,12 +53,11 @@ describe('Get Facility Query Tests', () => {
     await dbHelper.seedDb('facilities', [liveFacility]);
   });
 
-  it('should get new Facility', async () => {
-    const query = new GetFacilitiesQuery(1, 1);
-    const result = await queryBus.execute<GetFacilitiesQuery, FacilityDto[]>(
+  it('should get new Facility Count', async () => {
+    const query = new GetFacilitiesCountQuery();
+    const result = await queryBus.execute<GetFacilitiesCountQuery, number>(
       query,
     );
-    expect(result.length).toBeGreaterThan(0);
-    result.forEach(c => Logger.debug(`${c}`));
+    expect(result).toBeGreaterThan(0);
   });
 });

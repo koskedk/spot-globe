@@ -14,6 +14,10 @@ export class AgencyRepository extends BaseRepository<Agency>
       .findById(id)
       .populate('mechanisms')
       .exec();
-    return result;
+
+    if (result) {
+      return result.toObject();
+    }
+    return null;
   }
 }

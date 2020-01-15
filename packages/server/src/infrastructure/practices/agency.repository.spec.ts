@@ -38,6 +38,5 @@ describe('Agency Repository  Tests', () => {
   it('should load By Id', async () => {
     const data = await repository.getById(agencies[0]._id);
     expect(data).not.toBeNull();
-    Logger.log(data);
   });
 });

@@ -1,0 +1,25 @@
+[
+  {
+    "_id": "9eb178ca-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": "18512",
+    "name": "UON COE Niche",
+    "implementationName": "UON COE Niche",
+    "agency": "9eb13e4a-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "facilities": [
+      "4750c144-4c7f-46f1-a618-7fbfc50e8729",
+      "9defd321-13ca-475a-bc71-ae77ddb26acd",
+      "fb7d9a03-b3f7-47e0-94ab-f6965fef3d58"
+    ]
+  },
+  {
+    "_id": "9eb181ca-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "code": "0",
+    "name": "Health strat",
+    "implementationName": "Health strat",
+    "agency": "9eb13e4a-bb7b-11e9-9cb5-2a2ae2dbcce4",
+    "facilities": [
+      "95996f2e-5901-4911-aba1-0686a13b4bec",
+      "93587830-576f-4a82-933f-f3c8fc622fd7"
+    ]
+  }
+]

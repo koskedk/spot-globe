@@ -16,11 +16,19 @@ interface State {
   activeFacility: Facility;
   counties: County[];
   mechanisms: Mechanism[];
+  loading: boolean;
+  rows: number;
+  totalRecords: number;
+  page: number;
+  first: number;
+  sort: any;
+  filter: any;
 }
 
-const url = `https://${window.location.hostname}:4710/api/v1/practices/facilities/`;
+const url = `https://${window.location.hostname}:4710/api/v1/practices/facilities`;
 const countiesUrl = `https://${window.location.hostname}:4710/api/v1/locations/`;
 const mechanismsUrl = `https://${window.location.hostname}:4710/api/v1/practices/mechanisms/`;
+const facUrlCount = `https://${window.location.hostname}:4710/api/v1/practices/facilities/count`;
 
 export class FacilityScene extends Component<{}, State> {
   private messages: any;
@@ -37,7 +45,14 @@ export class FacilityScene extends Component<{}, State> {
         name: ""
       },
       counties: [],
-      mechanisms: []
+      mechanisms: [],
+      loading: false,
+      totalRecords: 0,
+      rows: 50,
+      page: 1,
+      first: 0,
+      sort: [],
+      filter: []
     };
   }
 
@@ -76,15 +91,59 @@ export class FacilityScene extends Component<{}, State> {
     }
   };
 
-  loadData = async () => {
+  loadCount = async () => {
+    this.setState(prevState => ({
+      ...prevState,
+      loading: true
+    }));
     try {
-      let res = await axios.get(url);
+      let res = await axios.get(facUrlCount);
       let data = res.data;
       this.setState(prevState => ({
         ...prevState,
+        totalRecords: data
+      }));
+    } catch (e) {
+      this.messages.show({
+        severity: "error",
+        summary: "Error loading",
+        detail: `${e}`
+      });
+    }
+  };
+
+  loadData = async () => {
+    this.setState(prevState => ({
+      ...prevState,
+      loading: true
+    }));
+    console.log(`Size:${this.state.rows} Page:${this.state.page}`);
+    try {
+      let geturl = `${url}/${this.state.rows}/${this.state.page}`;
+      if (this.state.sort) {
+        geturl = `${geturl}?sort=${this.state.sort}`;
+
+        if (this.state.filter) {
+          geturl = `${geturl}&filter=${this.state.filter}`;
+        }
+      } else {
+        if (this.state.filter) {
+          geturl = `${geturl}?filter=${this.state.filter}`;
+        }
+      }
+
+      let res = await axios.get(geturl);
+      let data = res.data;
+      this.setState(prevState => ({
+        ...prevState,
+        loading: false,
         facilities: data
       }));
     } catch (e) {
+      this.setState(prevState => ({
+        ...prevState,
+        loading: false
+      }));
       this.messages.show({
         severity: "error",
         summary: "Error loading",
@@ -121,6 +180,7 @@ export class FacilityScene extends Component<{}, State> {
         detail: `${savedFacility.name}`
       });
       this.resetState();
+      this.loadCount();
       this.loadData();
     } catch (e) {
       this.messages.show({
@@ -141,6 +201,7 @@ export class FacilityScene extends Component<{}, State> {
         detail: `${form.name}`
       });
       this.resetState();
+      this.loadCount();
       this.loadData();
     } catch (e) {
       this.messages.show({
@@ -163,6 +224,41 @@ export class FacilityScene extends Component<{}, State> {
     }));
   };
 
+  handlePage = async (event: any) => {
+    console.log(event);
+    this.setState(
+      prevState => ({
+        ...prevState,
+        rows: event.rows,
+        page: event.page + 1,
+        first: event.first
+      }),
+      () => this.loadData()
+    );
+  };
+
+  handleSort = async (event: any) => {
+    console.log(event);
+    this.setState(
+      prevState => ({
+        ...prevState,
+        sort: JSON.stringify(event)
+      }),
+      () => this.loadData()
+    );
+  };
+
+  handleFilter = async (event: any) => {
+    console.log(event);
+    this.setState(
+      prevState => ({
+        ...prevState,
+        filter: JSON.stringify(event)
+      }),
+      () => this.loadData()
+    );
+  };
+
   resetState = () => {
     this.setState({
       showForm: false,
@@ -177,6 +273,7 @@ export class FacilityScene extends Component<{}, State> {
 
   async componentDidMount() {
     await this.loadMeta();
+    await this.loadCount();
     await this.loadData();
   }
 
@@ -191,6 +288,13 @@ export class FacilityScene extends Component<{}, State> {
               facilities={this.state.facilities}
               onManage={this.handleManage}
               onAdd={this.handleAdd}
+              onPage={this.handlePage}
+              loading={this.state.loading}
+              totalRecords={this.state.totalRecords}
+              rows={this.state.rows}
+              first={this.state.first}
+              onSort={this.handleSort}
+              onFilter={this.handleFilter}
             />
           ) : (
             <div></div>

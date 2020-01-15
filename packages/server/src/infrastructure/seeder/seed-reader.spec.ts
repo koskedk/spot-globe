@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SeedReader } from './seed-reader';
-import uuid = require('uuid');
 
 describe('Seed Reader Tests', () => {
   let module: TestingModule;
@@ -21,8 +20,7 @@ describe('Seed Reader Tests', () => {
   });
 
   it('should read Seed', async () => {
-    const teams = await seedReader.read( 'team');
+    const teams = await seedReader.read('team.test');
     expect(teams.length).toBeGreaterThan(0);
-    Logger.debug(teams);
   });
 });

@@ -4,14 +4,10 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { LocationsController } from './controllers';
 import { GetLocationsHandler } from './queries';
 import { LocationsInfrastructureModule } from '../../infrastructure/locations';
-import { MessagingModule } from "../../infrastructure/messging/messaging.module";
+import { MessagingModule } from '../../infrastructure/messging/messaging.module';
 
 @Module({
-  imports: [
-    CqrsModule,
-    MessagingModule,
-    LocationsInfrastructureModule,
-  ],
+  imports: [CqrsModule, LocationsInfrastructureModule],
   controllers: [LocationsController],
   providers: [GetLocationsHandler],
 })

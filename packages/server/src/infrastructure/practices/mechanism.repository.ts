@@ -22,6 +22,19 @@ export class MechanismRepository extends BaseRepository<Mechanism>
     return result;
   }
 
+  async getAll(criteria?: any): Promise<Mechanism[]> {
+    if (criteria) {
+      return this.model
+        .find(criteria)
+        .populate(Agency.name.toLowerCase())
+        .exec();
+    }
+    return this.model
+      .find()
+      .populate(Agency.name.toLowerCase())
+      .exec();
+  }
+
   async getMechanisms(agencyId?: string): Promise<any[]> {
     let results = [];
     if (agencyId) {
