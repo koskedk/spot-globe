@@ -28,6 +28,7 @@ export class MechanismList extends Component<Props, {}> {
     return (
       <div>
         <Button
+          disabled={true}
           icon="pi pi-external-link"
           onClick={event => this.manageAction(event, rowData)}
         ></Button>
@@ -40,6 +41,7 @@ export class MechanismList extends Component<Props, {}> {
       <div className="p-clearfix" style={{ lineHeight: "1.87em" }}>
         Mechanisms{" "}
         <Button
+          disabled={true}
           onClick={this.addAction}
           icon="pi pi-plus"
           style={{ float: "right" }}

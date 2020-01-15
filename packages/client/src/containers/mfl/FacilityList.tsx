@@ -35,6 +35,7 @@ export class FacilityList extends Component<Props, {}> {
     return (
       <div>
         <Button
+          disabled={true}
           icon="pi pi-external-link"
           onClick={event => this.manageAction(event, rowData)}
         ></Button>
@@ -47,6 +48,7 @@ export class FacilityList extends Component<Props, {}> {
       <div className="p-clearfix" style={{ lineHeight: "1.87em" }}>
         Facilitiys{" "}
         <Button
+          disabled={true}
           onClick={this.addAction}
           icon="pi pi-plus"
           style={{ float: "right" }}
