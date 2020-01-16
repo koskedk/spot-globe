@@ -62,7 +62,7 @@ describe('Facilities Controller Tests', () => {
   });
 
   it('should get All Facilities', async () => {
-    const result = await controller.getFacilities(1, 1);
+    const result = await controller.getFacilities(null, null, 1, 1);
     expect(result.length).toBeGreaterThan(0);
     result.forEach(c => Logger.debug(`${c}`));
   });

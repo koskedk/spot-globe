@@ -19,5 +19,11 @@ export class AgencyRepository extends BaseRepository<Agency>
       return result.toObject();
     }
     return null;
+    return null;
+  }
+
+  async getBySyncId(ids: string[]): Promise<Agency[]> {
+    const result = await this.model.find({ _id: { $in: ids } }).exec();
+    return result;
   }
 }

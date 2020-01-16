@@ -5,6 +5,7 @@ import {
   AgencyUpdatedEvent,
 } from '../../application/practices/events';
 import { Mechanism } from './mechanism';
+import { AgenciesSyncedEvent } from '../../application/practices/events/agencies-synced.event';
 
 export class Agency extends AggregateRoot {
   _id: string;
@@ -31,6 +32,10 @@ export class Agency extends AggregateRoot {
       throw new Error(`Already ${mechanism.name} exists`);
     }
     this.mechanisms.push(mechanism);
+  }
+
+  syncAgencies(agencies: string[]) {
+    this.apply(new AgenciesSyncedEvent(agencies));
   }
 
   toString() {
