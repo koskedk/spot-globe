@@ -64,5 +64,6 @@ describe('Facility Repository Test', () => {
     const ids = facilities.map(a => a._id);
     const data = await repository.getBySyncId(ids);
     expect(data.length).toBeGreaterThan(0);
+    data.forEach(f => console.log(f));
   });
 });

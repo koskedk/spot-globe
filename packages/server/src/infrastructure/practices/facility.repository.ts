@@ -45,7 +45,15 @@ export class FacilityRepository extends BaseRepository<Facility>
       .exec();
   }
   async getBySyncId(ids: string[]): Promise<Facility[]> {
-    const result = await this.model.find({ _id: { $in: ids } }).lean();
+    const result = await this.model
+      .find({ _id: { $in: ids } })
+      .populate({
+        path: Mechanism.name.toLowerCase(),
+        select: '-facilities',
+        populate: { path: Agency.name.toLowerCase(), select: '-mechanisms' },
+      })
+      .populate(County.name.toLowerCase())
+      .lean();
 
     return result;
   }

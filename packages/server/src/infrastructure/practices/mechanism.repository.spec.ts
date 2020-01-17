@@ -62,5 +62,6 @@ describe('Mechanism Repository  Tests', () => {
     const ids = mechanisms.map(a => a._id);
     const data = await repository.getBySyncId(ids);
     expect(data.length).toBeGreaterThan(0);
+    data.forEach(m => console.log(m));
   });
 });
