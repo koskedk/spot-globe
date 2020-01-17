@@ -23,7 +23,8 @@ export class AgencyRepository extends BaseRepository<Agency>
   }
 
   async getBySyncId(ids: string[]): Promise<Agency[]> {
-    const result = await this.model.find({ _id: { $in: ids } }).exec();
+    const result = await this.model.find({ _id: { $in: ids } }).lean();
+
     return result;
   }
 }

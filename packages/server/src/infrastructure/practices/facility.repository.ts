@@ -2,6 +2,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BaseRepository } from '../common';
 import {
+  Agency,
   Facility,
   IFacilityRepository,
   Mechanism,
@@ -42,5 +43,10 @@ export class FacilityRepository extends BaseRepository<Facility>
       .skip(size * (page - 1))
       .limit(size)
       .exec();
+  }
+  async getBySyncId(ids: string[]): Promise<Facility[]> {
+    const result = await this.model.find({ _id: { $in: ids } }).lean();
+
+    return result;
   }
 }

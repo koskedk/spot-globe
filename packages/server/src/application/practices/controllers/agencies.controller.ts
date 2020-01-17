@@ -4,7 +4,7 @@ import { GetAgenciesQuery } from '../queries';
 import { AgencyDto } from '../../../domain/practices/dtos/agency.dto';
 import { SaveAgencyCommand } from '../commands/save-agency.command';
 import { DeleteAgencyCommand } from '../commands/delete-agency.command';
-import { SyncAgencyDto } from '../../../domain/practices/dtos/sync-agency.dto';
+import { SyncDto } from '../../../domain/practices/dtos/sync.dto';
 import { AgenciesSyncedEvent } from '../events/agencies-synced.event';
 
 @Controller('agencies')
@@ -28,7 +28,7 @@ export class AgenciesController {
   }
 
   @Post('sync')
-  async syncAgencies(@Body() agency: SyncAgencyDto) {
+  async syncAgencies(@Body() agency: SyncDto) {
     return this.eventBus.publish(new AgenciesSyncedEvent(agency._ids));
     return 'Synced!';
   }

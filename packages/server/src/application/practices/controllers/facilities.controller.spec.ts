@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { FacilitiesController } from './facilities.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { CommandBus, EventBus, QueryBus } from '@nestjs/cqrs';
 import { Logger } from '@nestjs/common';
 import { SaveFacilityHandler } from '../commands/handlers/save-facility.handler';
 import { SaveFacilityCommand } from '../commands/save-facility.command';
@@ -46,7 +46,11 @@ describe('Facilities Controller Tests', () => {
     const queryBus = module.get<QueryBus>(QueryBus);
     queryBus.bind(getFacilitiesHandler, GetFacilitiesQuery.name);
 
-    controller = new FacilitiesController(commandBus, queryBus);
+    controller = new FacilitiesController(
+      commandBus,
+      queryBus,
+      module.get<EventBus>(EventBus),
+    );
   });
 
   beforeEach(async () => {

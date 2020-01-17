@@ -4,6 +4,8 @@ import { AgenciesSyncedEvent } from '../agencies-synced.event';
 import { IAgencyRepository } from '../../../../domain/practices/agency-repository.interface';
 import { MessagingService } from '../../../../infrastructure/messging/messaging.service';
 import { ConfigService } from '../../../../config/config.service';
+import { plainToClass } from 'class-transformer';
+import { Agency } from '../../../../domain/practices';
 
 @EventsHandler(AgenciesSyncedEvent)
 export class AgenciesSyncedEventHandler
@@ -25,7 +27,7 @@ export class AgenciesSyncedEventHandler
     if (route && agencies && agencies.length > 0) {
       try {
         await this.messagingService.publish(
-          { label: AgenciesSyncedEvent.name, body: agencies },
+          { label: AgenciesSyncedEvent.name, body: JSON.stringify(agencies) },
           this.configService.QueueGlobeExchange,
           route,
         );

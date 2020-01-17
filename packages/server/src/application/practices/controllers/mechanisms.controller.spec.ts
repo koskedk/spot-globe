@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PracticesModule } from '../practices.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { CommandBus, EventBus, QueryBus } from '@nestjs/cqrs';
 import { Logger } from '@nestjs/common';
 import { SaveMechanismHandler } from '../commands/handlers/save-mechanism.handler';
 import { SaveMechanismCommand } from '../commands/save-mechanism.command';
@@ -32,15 +32,23 @@ describe('Mechanisms Controller Tests', () => {
     await dbHelper.initConnection();
     await dbHelper.seedDb('mechanisms', testMechanisms);
 
-    const saveMechanismHandler = module.get<SaveMechanismHandler>(SaveMechanismHandler);
+    const saveMechanismHandler = module.get<SaveMechanismHandler>(
+      SaveMechanismHandler,
+    );
     const commandBus = module.get<CommandBus>(CommandBus);
     commandBus.bind(saveMechanismHandler, SaveMechanismCommand.name);
 
-    const getMechanismsHandler = module.get<GetMechanismsHandler>(GetMechanismsHandler);
+    const getMechanismsHandler = module.get<GetMechanismsHandler>(
+      GetMechanismsHandler,
+    );
     const queryBus = module.get<QueryBus>(QueryBus);
     queryBus.bind(getMechanismsHandler, GetMechanismsQuery.name);
 
-    controller = new MechanismsController(commandBus, queryBus);
+    controller = new MechanismsController(
+      commandBus,
+      queryBus,
+      module.get<EventBus>(EventBus),
+    );
   });
 
   beforeEach(async () => {
@@ -49,7 +57,12 @@ describe('Mechanisms Controller Tests', () => {
   });
 
   it('should create Mechanism', async () => {
-    const mechanismDto: MechanismDto = { code: 'Demo', name: 'Demo', implementationName: 'IMP', agency: null };
+    const mechanismDto: MechanismDto = {
+      code: 'Demo',
+      name: 'Demo',
+      implementationName: 'IMP',
+      agency: null,
+    };
     const result = await controller.createOrUpdateMechanism(mechanismDto);
     expect(result).not.toBeNull();
     Logger.debug(result);

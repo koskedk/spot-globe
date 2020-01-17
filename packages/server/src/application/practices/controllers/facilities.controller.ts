@@ -8,13 +8,16 @@ import {
   Query,
   UseInterceptors,
 } from '@nestjs/common';
-import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { CommandBus, EventBus, QueryBus } from '@nestjs/cqrs';
 import { LoggingInterceptor } from '../../common';
 import { GetFacilitiesQuery } from '../queries';
 import { FacilityDto } from '../../../domain/practices/dtos/facility.dto';
 import { SaveFacilityCommand } from '../commands/save-facility.command';
 import { DeleteFacilityCommand } from '../commands/delete-facility.command';
 import { GetFacilitiesCountQuery } from '../queries/get-facilities-count.query';
+import { SyncDto } from '../../../domain/practices/dtos/sync.dto';
+import { AgenciesSyncedEvent } from '../events/agencies-synced.event';
+import { FacilitiesSyncedEvent } from '../events/facilities-synced.event';
 
 @UseInterceptors(LoggingInterceptor)
 @Controller('facilities')
@@ -22,6 +25,7 @@ export class FacilitiesController {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
+    private readonly eventBus: EventBus,
   ) {}
 
   @Get('/:size/:page')
@@ -64,5 +68,11 @@ export class FacilitiesController {
   @Delete(':id')
   async deleteFacility(@Param('id') id) {
     return this.commandBus.execute(new DeleteFacilityCommand(id));
+  }
+
+  @Post('sync')
+  async syncFacilities(@Body() facilities: SyncDto) {
+    return this.eventBus.publish(new FacilitiesSyncedEvent(facilities._ids));
+    return 'Synced!';
   }
 }

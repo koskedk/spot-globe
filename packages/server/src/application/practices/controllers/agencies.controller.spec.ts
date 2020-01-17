@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AgenciesController } from './agencies.controller';
 import { PracticesModule } from '../practices.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { CommandBus, EventBus, QueryBus } from '@nestjs/cqrs';
 import { Logger } from '@nestjs/common';
 import { SaveAgencyHandler } from '../commands/handlers/save-agency.handler';
 import { SaveAgencyCommand } from '../commands/save-agency.command';
@@ -11,6 +11,8 @@ import { Agency } from '../../../domain/practices/agency';
 import { getTestAgencies } from '../../../../test/test.data';
 import { GetAgenciesQuery } from '../queries/get-agencies.query';
 import { GetAgenciesHandler } from '../queries/handlers/get-agencies.handler';
+import { AgenciesSyncedEventHandler } from '../events/handlers/agencies-synced.handler';
+import { AgenciesSyncedEvent } from '../events/agencies-synced.event';
 
 describe('Practices Controller Tests', () => {
   let module: TestingModule;
@@ -35,11 +37,19 @@ describe('Practices Controller Tests', () => {
     const commandBus = module.get<CommandBus>(CommandBus);
     commandBus.bind(saveAgencyHandler, SaveAgencyCommand.name);
 
-    const getAgenciesHandler = module.get<GetAgenciesHandler>(GetAgenciesHandler);
+    const getAgenciesHandler = module.get<GetAgenciesHandler>(
+      GetAgenciesHandler,
+    );
     const queryBus = module.get<QueryBus>(QueryBus);
     queryBus.bind(getAgenciesHandler, GetAgenciesQuery.name);
 
-    controller = new AgenciesController(commandBus, queryBus);
+    const syncAgenciesHandler = module.get<AgenciesSyncedEventHandler>(
+      AgenciesSyncedEventHandler,
+    );
+    const eventBus = module.get<EventBus>(EventBus);
+    eventBus.bind(syncAgenciesHandler, AgenciesSyncedEvent.name);
+
+    controller = new AgenciesController(commandBus, queryBus, eventBus);
   });
 
   beforeEach(async () => {

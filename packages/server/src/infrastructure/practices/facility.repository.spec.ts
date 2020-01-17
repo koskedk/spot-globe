@@ -59,4 +59,10 @@ describe('Facility Repository Test', () => {
     const facs = await repository.getFacilities(1, 1, mechanisms[0]._id);
     expect(facs.length).toBeGreaterThan(0);
   });
+
+  it('should load By Ids', async () => {
+    const ids = facilities.map(a => a._id);
+    const data = await repository.getBySyncId(ids);
+    expect(data.length).toBeGreaterThan(0);
+  });
 });
