@@ -1,3 +1,4 @@
 export interface SyncDto {
-  _ids: string[];
+  batchSize?: number;
+  _ids?: string[];
 }

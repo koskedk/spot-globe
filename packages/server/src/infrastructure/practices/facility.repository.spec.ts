@@ -66,4 +66,10 @@ describe('Facility Repository Test', () => {
     expect(data.length).toBeGreaterThan(0);
     data.forEach(f => console.log(f));
   });
+
+  it('should load All paged', async () => {
+    const data = await repository.getAllToSync(1, 1);
+    expect(data.length).toBeGreaterThan(0);
+    data.forEach(f => console.log(f));
+  });
 });

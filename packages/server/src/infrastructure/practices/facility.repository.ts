@@ -8,7 +8,8 @@ import {
   Mechanism,
 } from '../../domain/practices';
 import { County } from '../../domain/locations';
-
+import { FacilityBagDto } from '../../domain/practices/dtos/facility-bag.dto';
+import { Packager } from '../../domain/common/packager';
 export class FacilityRepository extends BaseRepository<Facility>
   implements IFacilityRepository {
   constructor(@InjectModel(Facility.name) model: Model<Facility>) {
@@ -53,6 +54,22 @@ export class FacilityRepository extends BaseRepository<Facility>
         populate: { path: Agency.name.toLowerCase(), select: '-mechanisms' },
       })
       .populate(County.name.toLowerCase())
+      .lean();
+
+    return result;
+  }
+
+  async getAllToSync(size: number, page: number): Promise<Facility[]> {
+    const result = await this.model
+      .find()
+      .populate({
+        path: Mechanism.name.toLowerCase(),
+        select: '-facilities',
+        populate: { path: Agency.name.toLowerCase(), select: '-mechanisms' },
+      })
+      .populate(County.name.toLowerCase())
+      .skip(size * (page - 1))
+      .limit(size)
       .lean();
 
     return result;

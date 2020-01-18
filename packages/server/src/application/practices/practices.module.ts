@@ -34,6 +34,7 @@ import { GetFacilitiesCountHandler } from './queries/handlers/get-facilities-cou
 import { AgenciesSyncedEventHandler } from './events/handlers/agencies-synced.handler';
 import { FacilitiesSyncedEventHandler } from './events/handlers/facilities-synced.handler';
 import { MechanismsSyncedEventHandler } from './events/handlers/mechanisms-synced.handler';
+import { AllFacilitiesSyncedEventHandler } from './events/handlers/all-facilities-synced.handler';
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { MechanismsSyncedEventHandler } from './events/handlers/mechanisms-synce
     FacilityDeletedEventHandler,
     FacilityUpdatedEventHandler,
     FacilitiesSyncedEventHandler,
+    AllFacilitiesSyncedEventHandler,
     MechanismCreatedEventHandler,
     MechanismDeletedEventHandler,
     MechanismUpdatedEventHandler,

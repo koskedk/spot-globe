@@ -18,6 +18,7 @@ import { GetFacilitiesCountQuery } from '../queries/get-facilities-count.query';
 import { SyncDto } from '../../../domain/practices/dtos/sync.dto';
 import { AgenciesSyncedEvent } from '../events/agencies-synced.event';
 import { FacilitiesSyncedEvent } from '../events/facilities-synced.event';
+import { AllFacilitiesSyncedEvent } from '../events/all-facilities-synced.event';
 
 @UseInterceptors(LoggingInterceptor)
 @Controller('facilities')
@@ -74,5 +75,15 @@ export class FacilitiesController {
   async syncFacilities(@Body() facilities: SyncDto) {
     return this.eventBus.publish(new FacilitiesSyncedEvent(facilities._ids));
     return 'Synced!';
+  }
+
+  @Post('syncall')
+  async syncAllFacilities(@Body() facilities: SyncDto) {
+    return this.eventBus.publish(
+      new AllFacilitiesSyncedEvent(
+        facilities.batchSize ? facilities.batchSize : 20,
+      ),
+    );
+    return 'All Synced!';
   }
 }

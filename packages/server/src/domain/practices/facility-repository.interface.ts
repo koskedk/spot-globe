@@ -1,6 +1,7 @@
 import { Facility } from './facility';
 import { IRepository } from '../../application/common';
 import { Agency } from './agency';
+import { FacilityBagDto } from './dtos/facility-bag.dto';
 
 export interface IFacilityRepository extends IRepository<Facility> {
   getById(id: string): Promise<any>;
@@ -11,4 +12,5 @@ export interface IFacilityRepository extends IRepository<Facility> {
     filter?: any,
   ): Promise<any[]>;
   getBySyncId(ids: string[]): Promise<Facility[]>;
+  getAllToSync(size: number, page: number): Promise<Facility[]>;
 }
