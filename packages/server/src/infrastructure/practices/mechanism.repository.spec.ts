@@ -57,4 +57,11 @@ describe('Mechanism Repository  Tests', () => {
     const data = await repository.getMechanisms(agencies[0]._id);
     expect(data.length).toBeGreaterThan(0);
   });
+
+  it('should load By Ids', async () => {
+    const ids = mechanisms.map(a => a._id);
+    const data = await repository.getBySyncId(ids);
+    expect(data.length).toBeGreaterThan(0);
+    data.forEach(m => console.log(m));
+  });
 });

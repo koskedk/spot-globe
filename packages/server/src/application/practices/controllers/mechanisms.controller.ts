@@ -1,15 +1,19 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { CommandBus, EventBus, QueryBus } from '@nestjs/cqrs';
 import { GetMechanismsQuery } from '../queries';
 import { MechanismDto } from '../../../domain/practices/dtos/mechanism.dto';
 import { SaveMechanismCommand } from '../commands/save-mechanism.command';
 import { DeleteMechanismCommand } from '../commands/delete-mechanism.command';
+import { SyncDto } from '../../../domain/practices/dtos/sync.dto';
+import { AgenciesSyncedEvent } from '../events/agencies-synced.event';
+import { MechanismsSyncedEvent } from '../events/mechanisms-synced.event';
 
 @Controller('mechanisms')
 export class MechanismsController {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
+    private readonly eventBus: EventBus,
   ) {}
 
   @Get()
@@ -33,5 +37,11 @@ export class MechanismsController {
   @Delete(':id')
   async deleteMechanism(@Param('id') id) {
     return this.commandBus.execute(new DeleteMechanismCommand(id));
+  }
+
+  @Post('sync')
+  async syncMechanisms(@Body() mechanisms: SyncDto) {
+    return this.eventBus.publish(new MechanismsSyncedEvent(mechanisms._ids));
+    return 'Synced!';
   }
 }

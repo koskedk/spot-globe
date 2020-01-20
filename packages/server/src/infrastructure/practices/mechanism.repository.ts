@@ -52,4 +52,13 @@ export class MechanismRepository extends BaseRepository<Mechanism>
     }
     return results;
   }
+  async getBySyncId(ids: string[]): Promise<Mechanism[]> {
+    const result = await this.model
+      .find({ _id: { $in: ids } })
+      .populate({ path: Agency.name.toLowerCase(), select: '-mechanisms' })
+      .select('-facilities')
+      .lean();
+
+    return result;
+  }
 }
