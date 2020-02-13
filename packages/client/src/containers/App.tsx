@@ -202,7 +202,7 @@ export class App extends Component<Props, State> {
         }
       },
       {
-        label: "Facilities",
+        label: "Master Facilities",
         icon: "build",
         command: () => {
           window.location.hash = "/globe/facility";
