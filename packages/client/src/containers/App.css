@@ -5,3 +5,7 @@
 .layout-main {
     padding-top: 0px !important;
 }
+
+.p-inputtext {
+    border: 1px solid !important;
+}
