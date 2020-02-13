@@ -68,19 +68,21 @@ export class FacilityList extends Component<Props, {}> {
           rows={this.props.rows}
           rowsPerPageOptions={[50, 100, 200, 500]}
           totalRecords={this.props.totalRecords}
-          lazy={true}
-          onPage={this.props.onPage}
-          first={this.props.first}
-          onSort={this.props.onSort}
-          onFilter={this.props.onFilter}
         >
           <Column field="code" header="Code" sortable={true} filter={true} />
-          <Column field="name" header="Name" sortable={true} filter={true} />
+          <Column
+            field="name"
+            header="Name"
+            sortable={true}
+            filter={true}
+            filterMatchMode={"contains"}
+          />
           <Column
             field="county.name"
             header="County"
             sortable={true}
             filter={true}
+            filterMatchMode={"contains"}
           />
           <Column
             field="agency.name"
