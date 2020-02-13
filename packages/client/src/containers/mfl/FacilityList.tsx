@@ -46,7 +46,7 @@ export class FacilityList extends Component<Props, {}> {
   render() {
     const header = (
       <div className="p-clearfix" style={{ lineHeight: "1.87em" }}>
-        Facilitiys{" "}
+        Facilities{" "}
         <Button
           disabled={true}
           onClick={this.addAction}

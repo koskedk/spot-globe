@@ -176,7 +176,7 @@ export class MechanismScene extends Component<{}, State> {
         </div>
 
         <Dialog
-          header="Mechanism"
+          header="Implementing Partners"
           visible={this.state.showForm}
           style={{ width: "50vw" }}
           onHide={this.handleHide}
