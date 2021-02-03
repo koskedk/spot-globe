@@ -17,19 +17,18 @@ interface Props {
 }
 
 interface State {
-  facility: Facility
+  facility: Facility;
   counties: County[];
   mechanisms: Mechanism[];
 }
 
 export class FacilityForm extends Component<Props, State> {
-
   constructor(props: Readonly<Props>) {
     super(props);
     this.state = {
       facility: props.facility,
       counties: props.counties,
-      mechanisms: props.mechanisms
+      mechanisms: props.mechanisms,
     };
   }
 
@@ -56,11 +55,11 @@ export class FacilityForm extends Component<Props, State> {
     if (target.id && (target.id === "county" || target.id === "mechanism")) {
       name = target.id;
     }
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       facility: {
         ...prevState.facility,
-        [name]: value
-      }
+        [name]: value,
+      },
     }));
   };
 
@@ -68,20 +67,59 @@ export class FacilityForm extends Component<Props, State> {
     return (
       <div>
         <form>
-          <InputText type="text" value={this.state.facility._id} name="_id" readOnly onChange={this.handleInputChange}/>
-          <InputText type="text" value={this.state.facility.code} name="code" onChange={this.handleInputChange}/>
-          <InputText type="text" value={this.state.facility.name} name="name" onChange={this.handleInputChange}/>
-          <Dropdown value={this.state.facility.county}
-                    options={this.state.counties} onChange={this.handleInputChange}
-                    placeholder="Select a County"  id="county"/>
-          <Dropdown value={this.state.facility.mechanism}
-                    options={this.state.mechanisms} onChange={this.handleInputChange}
-                    placeholder="Select a Mechanism"  id="mechanism"/>
-          <Button onClick={this.saveAction} label="Save" icon="pi pi-check" className="p-button-success"/>
-          <Button onClick={this.cancelAction} label="Cancel" icon="pi pi-times"/>
-          <Button onClick={this.deleteAction} label="Delete" icon="pi pi-trash" className="p-button-danger"
-                  style={{ "float": "right" }}/>
+          <InputText
+            type="text"
+            value={this.state.facility._id}
+            name="_id"
+            readOnly
+            onChange={this.handleInputChange}
+          />
+          <InputText
+            type="text"
+            value={this.state.facility.code}
+            name="code"
+            onChange={this.handleInputChange}
+          />
+          <InputText
+            type="text"
+            value={this.state.facility.name}
+            name="name"
+            onChange={this.handleInputChange}
+          />
+          <Dropdown
+            value={this.state.facility.county}
+            options={this.state.counties}
+            onChange={this.handleInputChange}
+            placeholder="Select a County"
+            id="county"
+          />
+          <Dropdown
+            value={this.state.facility.mechanism}
+            options={this.state.mechanisms}
+            onChange={this.handleInputChange}
+            placeholder="Select a Mechanism"
+            id="mechanism"
+          />
+          <Button
+            onClick={this.saveAction}
+            label="Save"
+            icon="pi pi-check"
+            className="p-button-success"
+          />
+          <Button
+            onClick={this.cancelAction}
+            label="Cancel"
+            icon="pi pi-times"
+          />
+          <Button
+            onClick={this.deleteAction}
+            label="Delete"
+            icon="pi pi-trash"
+            className="p-button-danger"
+            style={{ float: "right" }}
+          />
         </form>
-      </div>);
+      </div>
+    );
   }
 }
