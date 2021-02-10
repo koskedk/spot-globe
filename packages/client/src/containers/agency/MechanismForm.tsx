@@ -14,11 +14,12 @@ interface Props {
 }
 
 interface State {
-  mechanism: Mechanism;
+  mechanism: Mechanism
   agencies: Agency[];
 }
 
 export class MechanismForm extends Component<Props, State> {
+
   constructor(props: Readonly<Props>) {
     super(props);
     this.state = {
@@ -48,7 +49,7 @@ export class MechanismForm extends Component<Props, State> {
     let name = target.name;
 
     if (target.id && target.id === "agency") {
-      name = target.id;
+      name = target.id
     }
     this.setState(prevState => ({
       mechanism: {
@@ -62,59 +63,21 @@ export class MechanismForm extends Component<Props, State> {
     return (
       <div>
         <form>
-          <InputText
-            type="text"
-            value={this.state.mechanism._id}
-            name="_id"
-            readOnly
-            onChange={this.handleInputChange}
-          />
-          <InputText
-            type="text"
-            value={this.state.mechanism.code}
-            name="code"
-            onChange={this.handleInputChange}
-          />
-          <InputText
-            type="text"
-            value={this.state.mechanism.name}
-            name="name"
-            onChange={this.handleInputChange}
-          />
-          <InputText
-            type="text"
-            value={this.state.mechanism.implementationName}
-            name="implementationName"
-            onChange={this.handleInputChange}
-          />
-          <Dropdown
-            value={this.state.mechanism.agency}
-            options={this.state.agencies}
-            onChange={this.handleInputChange}
-            placeholder="Select a Agency"
-            id="agency"
-          />
+          <InputText type="text" value={this.state.mechanism._id} name="_id" readOnly
+                     onChange={this.handleInputChange}/>
+          <InputText type="text" value={this.state.mechanism.code} name="code" onChange={this.handleInputChange}/>
+          <InputText type="text" value={this.state.mechanism.name} name="name" onChange={this.handleInputChange}/>
+          <InputText type="text" value={this.state.mechanism.implementationName} name="implementationName"
+                     onChange={this.handleInputChange}/>
+          <Dropdown value={this.state.mechanism.agency}
+                    options={this.state.agencies} onChange={this.handleInputChange}
+                    placeholder="Select a Agency"  id="agency"/>
 
-          <Button
-            onClick={this.saveAction}
-            label="Save"
-            icon="pi pi-check"
-            className="p-button-success"
-          />
-          <Button
-            onClick={this.cancelAction}
-            label="Cancel"
-            icon="pi pi-times"
-          />
-          <Button
-            onClick={this.deleteAction}
-            label="Delete"
-            icon="pi pi-trash"
-            className="p-button-danger"
-            style={{ float: "right" }}
-          />
+          <Button onClick={this.saveAction} label="Save" icon="pi pi-check" className="p-button-success"/>
+          <Button onClick={this.cancelAction} label="Cancel" icon="pi pi-times"/>
+          <Button onClick={this.deleteAction} label="Delete" icon="pi pi-trash" className="p-button-danger"
+                  style={{ "float": "right" }}/>
         </form>
-      </div>
-    );
+      </div>);
   }
 }

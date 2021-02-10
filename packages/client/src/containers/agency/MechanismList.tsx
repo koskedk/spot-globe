@@ -31,7 +31,7 @@ export class MechanismList extends Component<Props, {}> {
           disabled={true}
           hidden={true}
           icon="pi pi-external-link"
-          onClick={(event) => this.manageAction(event, rowData)}
+          onClick={event => this.manageAction(event, rowData)}
         ></Button>
       </div>
     );
