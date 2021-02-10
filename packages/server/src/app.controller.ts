@@ -3,8 +3,12 @@ import { Controller, Get, Logger, Res } from '@nestjs/common';
 @Controller()
 export class AppController {
   @Get()
-  getAppName(): string {
-    return 'dwapi Globe';
+  getAppName(): any {
+    return {
+      name: 'Dwapi Spot-Globe',
+      build: '10FEB212107',
+      staus: 'running',
+    };
   }
   @Get('globe')
   getLib(@Res() res): string {

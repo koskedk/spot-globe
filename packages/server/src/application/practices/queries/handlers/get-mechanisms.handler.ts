@@ -7,12 +7,17 @@ import { IMechanismRepository } from '../../../../domain/practices/mechanism-rep
 @QueryHandler(GetMechanismsQuery)
 export class GetMechanismsHandler implements IQueryHandler<GetMechanismsQuery, MechanismDto[]> {
   constructor(
-    @Inject('IMechanismRepository')
-    private readonly mechanismRepository: IMechanismRepository) {
+      @Inject('IMechanismRepository')
+      private readonly mechanismRepository: IMechanismRepository) {
   }
 
   async execute(query: GetMechanismsQuery): Promise<any> {
-    const results = await this.mechanismRepository.getAll();
+    let results = [];
+    if (query.name) {
+      results = await this.mechanismRepository.getMechanismsByName(query.name);
+    } else {
+      results = await this.mechanismRepository.getAll();
+    }
     return results;
   }
 }

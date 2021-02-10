@@ -4,38 +4,53 @@ import { FacilitiesSyncedEvent } from '../facilities-synced.event';
 import { IFacilityRepository } from '../../../../domain/practices/facility-repository.interface';
 import { MessagingService } from '../../../../infrastructure/messging/messaging.service';
 import { ConfigService } from '../../../../config/config.service';
+import {IMechanismRepository} from '../../../../domain/practices';
 
 @EventsHandler(FacilitiesSyncedEvent)
 export class FacilitiesSyncedEventHandler
   implements IEventHandler<FacilitiesSyncedEvent> {
   constructor(
-    private readonly configService: ConfigService,
-    private readonly messagingService: MessagingService,
-    @Inject('IFacilityRepository')
-    private readonly facilityRepository: IFacilityRepository,
-  ) {}
+      private readonly configService: ConfigService,
+      private readonly messagingService: MessagingService,
+      @Inject('IFacilityRepository')
+      private readonly facilityRepository: IFacilityRepository,
+      @Inject('IMechanismRepository')
+      private readonly mechanismRepository: IMechanismRepository,
+  ) {
+  }
 
   async handle(event: FacilitiesSyncedEvent) {
-    Logger.debug(`=== [${event.ids.length} ${event.codes.length}] FacilitiesSynced ===`);
     let facilities = [];
-    if (event.codes.length > 0) {
-      facilities = await this.facilityRepository.getBySyncCodes(event.codes);
-    } else {
+    if (event.ids) {
+      Logger.debug(`=== [${event.ids.length}] FacilitiesSynced ===`);
       facilities = await this.facilityRepository.getBySyncId(event.ids);
     }
+    if (event.codes) {
+      Logger.debug(`=== ${event.codes.length}] FacilitiesSynced ===`);
+      facilities = await this.facilityRepository.getBySyncCodes(event.codes);
+    }
+    if (event.partner) {
+      Logger.debug(`=== ${event.partner}] FacilitiesSynced ===`);
+      const mechanisms = await this.mechanismRepository.getMechanismsByName(event.partner);
+      if (mechanisms && mechanisms.length > 0) {
+        const ids = mechanisms.map((m) => m._id);
+        facilities = await this.facilityRepository.getBySyncMechanismsId(ids);
+      }
+    }
+
     const route = this.configService.QueueGlobeRoutes.find(c =>
-      c.includes('practice'),
+        c.includes('practice'),
     );
 
     if (route && facilities && facilities.length > 0) {
       try {
         await this.messagingService.publish(
-          {
-            label: FacilitiesSyncedEvent.name,
-            body: JSON.stringify(facilities),
-          },
-          this.configService.QueueGlobeExchange,
-          route,
+            {
+              label: FacilitiesSyncedEvent.name,
+              body: JSON.stringify(facilities),
+            },
+            this.configService.QueueGlobeExchange,
+            route,
         );
         Logger.debug(`*** FacilitiesSynced Published ****:`);
       } catch (e) {

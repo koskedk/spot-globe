@@ -6,5 +6,5 @@ export interface IMechanismRepository extends IRepository<Mechanism> {
   getById(id: string): Promise<any>;
   getMechanisms(agencyId?: string): Promise<any[]>;
   getBySyncId(ids: string[]): Promise<Mechanism[]>;
-
+  getMechanismsByName(name: string): Promise<any[]>;
 }

@@ -74,6 +74,20 @@ export class FacilityRepository extends BaseRepository<Facility>
     return result;
   }
 
+    async getBySyncMechanismsId(ids: string[]): Promise<Facility[]> {
+        const result = await this.model
+            .find({ mechanism: { $in: ids } })
+            .populate({
+                path: Mechanism.name.toLowerCase(),
+                select: '-facilities',
+                populate: { path: Agency.name.toLowerCase(), select: '-mechanisms' },
+            })
+            .populate(County.name.toLowerCase())
+            .lean();
+
+        return result;
+    }
+
   async getAllToSync(size: number, page: number): Promise<Facility[]> {
     const result = await this.model
       .find()

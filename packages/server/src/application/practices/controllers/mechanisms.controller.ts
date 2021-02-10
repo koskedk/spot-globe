@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Query} from '@nestjs/common';
 import { CommandBus, EventBus, QueryBus } from '@nestjs/cqrs';
 import { GetMechanismsQuery } from '../queries';
 import { MechanismDto } from '../../../domain/practices/dtos/mechanism.dto';
@@ -19,6 +19,11 @@ export class MechanismsController {
   @Get()
   async getMechanisms(): Promise<any> {
     return this.queryBus.execute(new GetMechanismsQuery());
+  }
+
+  @Get('search')
+  async getMechanismsByName(@Query('name') name): Promise<any> {
+    return this.queryBus.execute(new GetMechanismsQuery(name));
   }
 
   @Post()
