@@ -25,12 +25,12 @@ export class MechanismRepository extends BaseRepository<Mechanism>
   async getAll(criteria?: any): Promise<Mechanism[]> {
     if (criteria) {
       return this.model
-        .find(criteria)
+        .find(criteria).sort({name: 1})
         .populate(Agency.name.toLowerCase())
         .exec();
     }
     return this.model
-      .find()
+      .find().sort({name: 1})
       .populate(Agency.name.toLowerCase())
       .exec();
   }

@@ -9,4 +9,11 @@ export class LocationRepository extends BaseRepository<County> implements ILocat
   constructor(@InjectModel(County.name)model: Model<County>) {
     super(model);
   }
+
+  async loadAll(): Promise<County[]> {
+    const result = await this.model.find()
+        .sort({name: 1})
+        .exec();
+    return result;
+  }
 }

@@ -16,8 +16,13 @@ export class FacilitiesSyncedEventHandler
   ) {}
 
   async handle(event: FacilitiesSyncedEvent) {
-    Logger.debug(`=== [${event.ids.length}] FacilitiesSynced ===`);
-    const facilities = await this.facilityRepository.getBySyncId(event.ids);
+    Logger.debug(`=== [${event.ids.length} ${event.codes.length}] FacilitiesSynced ===`);
+    let facilities = [];
+    if (event.codes.length > 0) {
+      facilities = await this.facilityRepository.getBySyncCodes(event.codes);
+    } else {
+      facilities = await this.facilityRepository.getBySyncId(event.ids);
+    }
     const route = this.configService.QueueGlobeRoutes.find(c =>
       c.includes('practice'),
     );

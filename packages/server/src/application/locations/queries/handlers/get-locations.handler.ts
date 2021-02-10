@@ -13,6 +13,6 @@ export class GetLocationsHandler
   ) {}
 
   async execute(query: GetLocationsQuery): Promise<CountyDto[]> {
-    return await this.repository.getAll();
+    return await this.repository.loadAll();
   }
 }

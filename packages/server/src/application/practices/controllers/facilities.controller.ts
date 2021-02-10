@@ -20,7 +20,6 @@ import { AgenciesSyncedEvent } from '../events/agencies-synced.event';
 import { FacilitiesSyncedEvent } from '../events/facilities-synced.event';
 import { AllFacilitiesSyncedEvent } from '../events/all-facilities-synced.event';
 
-@UseInterceptors(LoggingInterceptor)
 @Controller('facilities')
 export class FacilitiesController {
   constructor(

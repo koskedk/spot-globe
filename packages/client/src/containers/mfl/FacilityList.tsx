@@ -3,6 +3,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Facility } from "./models/facility";
+import {FacilityHome} from "./FacilityHome";
 
 interface Props {
   facilities: Facility[];
@@ -35,8 +36,8 @@ export class FacilityList extends Component<Props, {}> {
     return (
       <div>
         <Button
-          disabled={true}
-          hidden={true}
+          disabled={false}
+          hidden={false}
           icon="pi pi-external-link"
           onClick={event => this.manageAction(event, rowData)}
         ></Button>
@@ -85,8 +86,8 @@ export class FacilityList extends Component<Props, {}> {
             filterMatchMode={"contains"}
           />
           <Column
-            field="agency.name"
-            header="Agency"
+            field="mechanism.name"
+            header="Partner"
             sortable={true}
             filter={true}
           />

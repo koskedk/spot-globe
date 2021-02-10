@@ -12,5 +12,6 @@ export interface IFacilityRepository extends IRepository<Facility> {
     filter?: any,
   ): Promise<any[]>;
   getBySyncId(ids: string[]): Promise<Facility[]>;
+  getBySyncCodes(codes: number[]): Promise<Facility[]>;
   getAllToSync(size: number, page: number): Promise<Facility[]>;
 }
