@@ -36,8 +36,8 @@ export class FacilityList extends Component<Props, {}> {
     return (
       <div>
         <Button
-          disabled={false}
-          hidden={false}
+          disabled={true}
+          hidden={true}
           icon="pi pi-external-link"
           onClick={event => this.manageAction(event, rowData)}
         ></Button>
