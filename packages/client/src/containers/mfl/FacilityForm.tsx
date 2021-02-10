@@ -54,8 +54,10 @@ export class FacilityForm extends Component<Props, State> {
     let name = target.name;
 
     if (target.id && (target.id === "county" || target.id === "mechanism")) {
+      console.log('xxxx', target);
       name = target.id;
     }
+    console.log('>>',[name],value);
     this.setState(prevState => ({
       facility: {
         ...prevState.facility,
@@ -71,10 +73,10 @@ export class FacilityForm extends Component<Props, State> {
           <InputText type="text" value={this.state.facility._id} name="_id" readOnly onChange={this.handleInputChange}/>
           <InputText type="text" value={this.state.facility.code} name="code" onChange={this.handleInputChange}/>
           <InputText type="text" value={this.state.facility.name} name="name" onChange={this.handleInputChange}/>
-          <Dropdown value={this.state.facility.county}
+          <Dropdown value={this.state.facility.county && this.state.facility.county._id ? this.state.facility.county._id : this.state.facility.county}
                     options={this.state.counties} onChange={this.handleInputChange}
                     placeholder="Select a County"  id="county"/>
-          <Dropdown value={this.state.facility.mechanism}
+          <Dropdown value={this.state.facility.mechanism && this.state.facility.mechanism._id ? this.state.facility.mechanism._id : this.state.facility.mechanism}
                     options={this.state.mechanisms} onChange={this.handleInputChange}
                     placeholder="Select a Mechanism"  id="mechanism"/>
           <Button onClick={this.saveAction} label="Save" icon="pi pi-check" className="p-button-success"/>

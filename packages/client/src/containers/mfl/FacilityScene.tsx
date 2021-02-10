@@ -78,7 +78,7 @@ export class FacilityScene extends Component<{}, State> {
       this.setState(prevState => ({
         ...prevState,
         mechanisms: data.map((a: Mechanism) => ({
-          label: a.name,
+          label: `${a.name} ${a.code})`,
           value: a._id
         }))
       }));
@@ -161,6 +161,8 @@ export class FacilityScene extends Component<{}, State> {
   };
 
   handleManage = (rowData: any) => {
+    console.log(rowData);
+
     this.setState(prevState => ({
       ...prevState,
       activeFacility: rowData,

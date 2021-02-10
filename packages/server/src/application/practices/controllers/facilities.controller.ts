@@ -20,7 +20,6 @@ import { AgenciesSyncedEvent } from '../events/agencies-synced.event';
 import { FacilitiesSyncedEvent } from '../events/facilities-synced.event';
 import { AllFacilitiesSyncedEvent } from '../events/all-facilities-synced.event';
 
-@UseInterceptors(LoggingInterceptor)
 @Controller('facilities')
 export class FacilitiesController {
   constructor(
@@ -73,7 +72,8 @@ export class FacilitiesController {
 
   @Post('sync')
   async syncFacilities(@Body() facilities: SyncDto) {
-    return this.eventBus.publish(new FacilitiesSyncedEvent(facilities._ids));
+    return this.eventBus.publish(
+        new FacilitiesSyncedEvent(facilities._ids, facilities.codes, facilities.partner));
     return 'Synced!';
   }
 

@@ -8,17 +8,31 @@ import { IFacilityRepository } from '../../../../domain/practices/facility-repos
 export class GetFacilitiesHandler
   implements IQueryHandler<GetFacilitiesQuery, FacilityDto[]> {
   constructor(
-    @Inject('IFacilityRepository')
-    private readonly facilityRepository: IFacilityRepository,
-  ) {}
+      @Inject('IFacilityRepository')
+      private readonly facilityRepository: IFacilityRepository,
+  ) {
+  }
 
   async execute(query: GetFacilitiesQuery): Promise<any> {
     const results = await this.facilityRepository.getFacilities(
-      query.size,
-      query.page,
-      query.sort,
-      query.filter,
+        query.size,
+        query.page,
+        query.sort,
+        query.filter,
     );
-    return results;
+
+    return results.sort(
+
+        (a, b) => {
+          if (a.mechanism && a.mechanism.name && b.mechanism && b.mechanism.name) {
+            if (a.mechanism.name > b.mechanism.name) {
+              return 1;
+            }
+            if (a.mechanism.name === b.mechanism.name) {
+              return 1;
+            }
+          }
+          return -1;
+        });
   }
 }
