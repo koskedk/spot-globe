@@ -1,4 +1,12 @@
-import {Body, Controller, Delete, Get, Param, Post, Query} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { CommandBus, EventBus, QueryBus } from '@nestjs/cqrs';
 import { GetMechanismsQuery } from '../queries';
 import { MechanismDto } from '../../../domain/practices/dtos/mechanism.dto';

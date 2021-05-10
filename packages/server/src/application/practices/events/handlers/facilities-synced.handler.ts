@@ -4,20 +4,19 @@ import { FacilitiesSyncedEvent } from '../facilities-synced.event';
 import { IFacilityRepository } from '../../../../domain/practices/facility-repository.interface';
 import { MessagingService } from '../../../../infrastructure/messging/messaging.service';
 import { ConfigService } from '../../../../config/config.service';
-import {IMechanismRepository} from '../../../../domain/practices';
+import { IMechanismRepository } from '../../../../domain/practices';
 
 @EventsHandler(FacilitiesSyncedEvent)
 export class FacilitiesSyncedEventHandler
   implements IEventHandler<FacilitiesSyncedEvent> {
   constructor(
-      private readonly configService: ConfigService,
-      private readonly messagingService: MessagingService,
-      @Inject('IFacilityRepository')
-      private readonly facilityRepository: IFacilityRepository,
-      @Inject('IMechanismRepository')
-      private readonly mechanismRepository: IMechanismRepository,
-  ) {
-  }
+    private readonly configService: ConfigService,
+    private readonly messagingService: MessagingService,
+    @Inject('IFacilityRepository')
+    private readonly facilityRepository: IFacilityRepository,
+    @Inject('IMechanismRepository')
+    private readonly mechanismRepository: IMechanismRepository,
+  ) {}
 
   async handle(event: FacilitiesSyncedEvent) {
     let facilities = [];
@@ -31,26 +30,28 @@ export class FacilitiesSyncedEventHandler
     }
     if (event.partner) {
       Logger.debug(`=== ${event.partner}] FacilitiesSynced ===`);
-      const mechanisms = await this.mechanismRepository.getMechanismsByName(event.partner);
+      const mechanisms = await this.mechanismRepository.getMechanismsByName(
+        event.partner,
+      );
       if (mechanisms && mechanisms.length > 0) {
         const ids = mechanisms.map((m) => m._id);
         facilities = await this.facilityRepository.getBySyncMechanismsId(ids);
       }
     }
 
-    const route = this.configService.QueueGlobeRoutes.find(c =>
-        c.includes('practice'),
+    const route = this.configService.QueueGlobeRoutes.find((c) =>
+      c.includes('practice'),
     );
 
     if (route && facilities && facilities.length > 0) {
       try {
         await this.messagingService.publish(
-            {
-              label: FacilitiesSyncedEvent.name,
-              body: JSON.stringify(facilities),
-            },
-            this.configService.QueueGlobeExchange,
-            route,
+          {
+            label: FacilitiesSyncedEvent.name,
+            body: JSON.stringify(facilities),
+          },
+          this.configService.QueueGlobeExchange,
+          route,
         );
         Logger.debug(`*** FacilitiesSynced Published ****:`);
       } catch (e) {

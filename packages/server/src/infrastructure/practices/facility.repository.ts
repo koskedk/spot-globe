@@ -35,8 +35,7 @@ export class FacilityRepository extends BaseRepository<Facility>
     if (mechanismId) {
       results = this.model.find({ mechanism: mechanismId });
     } else {
-      results = this.model.find()
-          .sort({mechanism: -1, name: 1});
+      results = this.model.find().sort({ mechanism: -1, name: 1 });
     }
 
     return results
@@ -62,31 +61,31 @@ export class FacilityRepository extends BaseRepository<Facility>
 
   async getBySyncCodes(codes: number[]): Promise<Facility[]> {
     const result = await this.model
-        .find({ code: { $in: codes } })
-        .populate({
-          path: Mechanism.name.toLowerCase(),
-          select: '-facilities',
-          populate: { path: Agency.name.toLowerCase(), select: '-mechanisms' },
-        })
-        .populate(County.name.toLowerCase())
-        .lean();
+      .find({ code: { $in: codes } })
+      .populate({
+        path: Mechanism.name.toLowerCase(),
+        select: '-facilities',
+        populate: { path: Agency.name.toLowerCase(), select: '-mechanisms' },
+      })
+      .populate(County.name.toLowerCase())
+      .lean();
 
     return result;
   }
 
-    async getBySyncMechanismsId(ids: string[]): Promise<Facility[]> {
-        const result = await this.model
-            .find({ mechanism: { $in: ids } })
-            .populate({
-                path: Mechanism.name.toLowerCase(),
-                select: '-facilities',
-                populate: { path: Agency.name.toLowerCase(), select: '-mechanisms' },
-            })
-            .populate(County.name.toLowerCase())
-            .lean();
+  async getBySyncMechanismsId(ids: string[]): Promise<Facility[]> {
+    const result = await this.model
+      .find({ mechanism: { $in: ids } })
+      .populate({
+        path: Mechanism.name.toLowerCase(),
+        select: '-facilities',
+        populate: { path: Agency.name.toLowerCase(), select: '-mechanisms' },
+      })
+      .populate(County.name.toLowerCase())
+      .lean();
 
-        return result;
-    }
+    return result;
+  }
 
   async getAllToSync(size: number, page: number): Promise<Facility[]> {
     const result = await this.model

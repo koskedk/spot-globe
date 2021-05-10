@@ -3,7 +3,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Facility } from "./models/facility";
-import {FacilityHome} from "./FacilityHome";
+import { FacilityHome } from "./FacilityHome";
 
 interface Props {
   facilities: Facility[];
@@ -39,7 +39,7 @@ export class FacilityList extends Component<Props, {}> {
           disabled={true}
           hidden={true}
           icon="pi pi-external-link"
-          onClick={event => this.manageAction(event, rowData)}
+          onClick={(event) => this.manageAction(event, rowData)}
         ></Button>
       </div>
     );

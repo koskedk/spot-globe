@@ -42,7 +42,7 @@ export class FacilityScene extends Component<{}, State> {
       activeFacility: {
         _id: "00000000-0000-0000-0000-000000000000",
         code: "",
-        name: ""
+        name: "",
       },
       counties: [],
       mechanisms: [],
@@ -52,7 +52,7 @@ export class FacilityScene extends Component<{}, State> {
       page: 1,
       first: 0,
       sort: [],
-      filter: []
+      filter: [],
     };
   }
 
@@ -60,62 +60,62 @@ export class FacilityScene extends Component<{}, State> {
     try {
       let res = await axios.get(countiesUrl);
       let data = res.data;
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         ...prevState,
-        counties: data.map((a: County) => ({ label: a.name, value: a._id }))
+        counties: data.map((a: County) => ({ label: a.name, value: a._id })),
       }));
     } catch (e) {
       this.messages.show({
         severity: "error",
         summary: "Error loading",
-        detail: `${e}`
+        detail: `${e}`,
       });
     }
 
     try {
       let res = await axios.get(mechanismsUrl);
       let data = res.data;
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         ...prevState,
         mechanisms: data.map((a: Mechanism) => ({
           label: `${a.name} ${a.code})`,
-          value: a._id
-        }))
+          value: a._id,
+        })),
       }));
     } catch (e) {
       this.messages.show({
         severity: "error",
         summary: "Error loading",
-        detail: `${e}`
+        detail: `${e}`,
       });
     }
   };
 
   loadCount = async () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      loading: true
+      loading: true,
     }));
     try {
       let res = await axios.get(facUrlCount);
       let data = res.data;
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         ...prevState,
-        totalRecords: data
+        totalRecords: data,
       }));
     } catch (e) {
       this.messages.show({
         severity: "error",
         summary: "Error loading",
-        detail: `${e}`
+        detail: `${e}`,
       });
     }
   };
 
   loadData = async () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      loading: true
+      loading: true,
     }));
     console.log(`Size:${this.state.rows} Page:${this.state.page}`);
     try {
@@ -134,40 +134,40 @@ export class FacilityScene extends Component<{}, State> {
 
       let res = await axios.get(geturl);
       let data = res.data;
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         ...prevState,
         loading: false,
-        facilities: data
+        facilities: data,
       }));
     } catch (e) {
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         ...prevState,
-        loading: false
+        loading: false,
       }));
       this.messages.show({
         severity: "error",
         summary: "Error loading",
-        detail: `${e}`
+        detail: `${e}`,
       });
     }
   };
 
   handleAdd = () => {
     this.resetState();
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      showForm: true
+      showForm: true,
     }));
   };
 
   handleManage = (rowData: any) => {
     console.log(rowData);
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
       activeFacility: rowData,
       showForm: true,
-      editMode: true
+      editMode: true,
     }));
   };
 
@@ -179,7 +179,7 @@ export class FacilityScene extends Component<{}, State> {
       this.messages.show({
         severity: "success",
         summary: "Saved successfully",
-        detail: `${savedFacility.name}`
+        detail: `${savedFacility.name}`,
       });
       this.resetState();
       this.loadCount();
@@ -188,7 +188,7 @@ export class FacilityScene extends Component<{}, State> {
       this.messages.show({
         severity: "error",
         summary: "Error occurred",
-        detail: `${e}`
+        detail: `${e}`,
       });
     }
   };
@@ -200,7 +200,7 @@ export class FacilityScene extends Component<{}, State> {
       this.messages.show({
         severity: "success",
         summary: "Deleted successfully",
-        detail: `${form.name}`
+        detail: `${form.name}`,
       });
       this.resetState();
       this.loadCount();
@@ -209,7 +209,7 @@ export class FacilityScene extends Component<{}, State> {
       this.messages.show({
         severity: "error",
         summary: "Error ocurred",
-        detail: `${e}`
+        detail: `${e}`,
       });
     }
   };
@@ -220,20 +220,20 @@ export class FacilityScene extends Component<{}, State> {
   };
 
   handleHide = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
-      showForm: false
+      showForm: false,
     }));
   };
 
   handlePage = async (event: any) => {
     console.log(event);
     this.setState(
-      prevState => ({
+      (prevState) => ({
         ...prevState,
         rows: event.rows,
         page: event.page + 1,
-        first: event.first
+        first: event.first,
       }),
       () => this.loadData()
     );
@@ -242,9 +242,9 @@ export class FacilityScene extends Component<{}, State> {
   handleSort = async (event: any) => {
     console.log(event);
     this.setState(
-      prevState => ({
+      (prevState) => ({
         ...prevState,
-        sort: JSON.stringify(event)
+        sort: JSON.stringify(event),
       }),
       () => this.loadData()
     );
@@ -253,9 +253,9 @@ export class FacilityScene extends Component<{}, State> {
   handleFilter = async (event: any) => {
     console.log(event);
     this.setState(
-      prevState => ({
+      (prevState) => ({
         ...prevState,
-        filter: JSON.stringify(event)
+        filter: JSON.stringify(event),
       }),
       () => this.loadData()
     );
@@ -268,8 +268,8 @@ export class FacilityScene extends Component<{}, State> {
       activeFacility: {
         _id: "00000000-0000-0000-0000-000000000000",
         code: "",
-        name: ""
-      }
+        name: "",
+      },
     });
   };
 
@@ -282,7 +282,7 @@ export class FacilityScene extends Component<{}, State> {
   render() {
     return (
       <div>
-        <Growl ref={el => (this.messages = el)}></Growl>
+        <Growl ref={(el) => (this.messages = el)}></Growl>
 
         <div>
           {this.state.facilities ? (
